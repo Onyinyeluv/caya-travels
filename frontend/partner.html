@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner with Caya Express - Recruitment Partners</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0cIPzL1Pjf2zVuqxigspHGbnbL218ASw",
+      authDomain: "caya-express-admin.firebaseapp.com",
+      projectId: "caya-express-admin",
+      storageBucket: "caya-express-admin.firebasestorage.app",
+      messagingSenderId: "735192003762",
+      appId: "1:735192003762:web:6cfbfc191145ca892785ab"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Make Firebase available globally
+    window.firebaseDB = db;
+    window.firebaseModules = {
+      collection,
+      addDoc,
+      serverTimestamp
+    };
+
+    console.log('Firebase initialized for partner form');
+  </script>
+
+  <!-- Mobile Menu Functions (shared) -->
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
+      if (!isClickInside && navMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --primary-gold: #D4AF37;
+      --dark-blue: #1a237e;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--gray-800);
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-700);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-gold);
+      margin: 3px 0;
+      transition: all 0.3s;
+      border-radius: 3px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .cta-btn {
+      background: var(--primary-gold);
+      color: white;
+      padding: 0.625rem 1.5rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .cta-btn:hover {
+      background: #C5A028;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #283593 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .hero-cta {
+      background: var(--primary-gold);
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .hero-cta:hover {
+      background: #C5A028;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Reasons Section */
+    .reasons-section {
+      padding: 5rem 2rem;
+      background: white;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 4rem;
+    }
+
+    .reasons-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+    }
+
+    .reason-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 2.5rem;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-color: var(--primary-gold);
+    }
+
+    .reason-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .reason-tag {
+      color: var(--primary-gold);
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .reason-card h3 {
+      font-size: 1.75rem;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .reason-card p {
+      color: var(--gray-600);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .reason-link {
+      color: var(--primary-gold);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      transition: gap 0.3s;
+    }
+
+    .reason-link:hover {
+      gap: 1rem;
+    }
+
+    /* Benefits Section */
+    .benefits-section {
+      background: var(--gray-50);
+      padding: 5rem 2rem;
+    }
+
+    .benefits-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .benefit-item {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .benefit-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .benefit-label {
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 1.1rem;
+    }
+
+    /* Partners Section */
+    .partners-section {
+      padding: 5rem 2rem;
+      background: white;
+    }
+
+    .partners-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .partner-tab {
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--gray-300);
+      background: white;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .partner-tab.active {
+      background: var(--primary-gold);
+      color: white;
+      border-color: var(--primary-gold);
+    }
+
+    .partner-tab:hover {
+      border-color: var(--primary-gold);
+    }
+
+    .partners-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .partner-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .partner-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .partner-card h3 {
+      font-size: 1.25rem;
+      color: var(--gray-900);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .partner-location {
+      color: var(--gray-500);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .partner-description {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .explore-more {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .explore-btn {
+      color: var(--primary-gold);
+      border: 2px solid var(--primary-gold);
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+
+    .explore-btn:hover {
+      background: var(--primary-gold);
+      color: white;
+    }
+
+    /* Testimonial Section */
+    .testimonial-section {
+      background: linear-gradient(135deg, #283593 0%, var(--dark-blue) 100%);
+      color: white;
+      padding: 5rem 2rem;
+    }
+
+    .testimonial-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .testimonial-text {
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .testimonial-company {
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--gray-50);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      color: var(--gray-900);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      color: var(--gray-600);
+      margin-bottom: 2.5rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gray-900);
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      color: var(--primary-gold);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-300);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-700);
+      color: var(--gray-400);
+    }
+
+    /* Registration Form Styles */
+    .registration-container {
+      max-width: 800px;
+      margin: 3rem auto 0;
+      background: white;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .registration-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 2px solid var(--gray-300);
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      background: var(--primary-gold);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      background: #C5A028;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .submit-btn:disabled {
+      background: var(--gray-400);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-message {
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 500;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .form-message.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      display: block;
+    }
+
+    .form-message.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .reasons-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .partners-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 6rem 2rem 2rem;
+        gap: 1rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 100;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: left;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .logo span {
+        font-size: 1rem !important;
+      }
+
+      .logo img {
+        height: 60px !important;
+      }
+
+      .registration-container {
+        padding: 1.5rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 90px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+      </a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="programs.html" onclick="closeMenu()">Programs</a></li>
+        <li><a href="partner.html" onclick="closeMenu()">Partner</a></li>
+        <li><a href="agent-portal.html" onclick="closeMenu()">Agent Portal</a></li>
+        <li><a href="study-abroad.html" onclick="closeMenu()">Study Abroad</a></li>
+        <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+        <li><button class="cta-btn" onclick="closeMenu()">Get Started</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Join the Smartest Platform for International Student Recruitment</h1>
+      <p>Revolutionize your international student enrollment with the most trusted platform for global student mobility, partnered with over 1,500 institutions worldwide.</p>
+      <a href="#register" class="hero-cta">Register Now</a>
+    </div>
+  </section>
+
+  <!-- Reasons Section -->
+  <section class="reasons-section">
+    <h2 class="section-title">6 Reasons to Partner with Caya Express</h2>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="reason-icon">🎓</div>
+        <span class="reason-tag">PROGRAMS</span>
+        <h3>Access 150,000+ Global Study Programs</h3>
+        <p>Explore the world from one platform. No need to manage partnerships or contracts. Find programs to suit any student's needs. Plus, discover exclusive institutions that are only available here.</p>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-icon">✅</div>
+        <span class="reason-tag">QUALITY</span>
+        <h3>Boost Your Success Rate to 95%</h3>
+        <p>Tired of taking risks? Our AI-powered tech and built-in quality checks result in a 95% chance of application success, meaning more student success and more consistent commissions.</p>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-icon">📊</div>
+        <span class="reason-tag">INSIGHTS</span>
+        <h3>Explore Sector-Leading Training and Insights</h3>
+        <p>Stay informed, compliant, and ahead of the competition. Rely on the experts for strategic insights, document verification, comprehensive training, and resources to elevate your business.</p>
+        <a href="#" class="reason-link">Read Our Latest Trends Report →</a>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-icon">⏰</div>
+        <span class="reason-tag">SAVINGS</span>
+        <h3>Save Yourself Time and Money</h3>
+        <p>Use proven automation technology to speed up applications and eliminate back-and-forth. Revolutionize your workflow and put students (and your business) on the fast track to success.</p>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-icon">🌐</div>
+        <span class="reason-tag">SOLUTIONS</span>
+        <h3>Find Everything from Loans to Language Tests</h3>
+        <p>Our 360 Solutions help you attract and support students well beyond their study application. Grow your business with loans, GICs, language test vouchers, financial services, and beyond.</p>
+        <a href="#" class="reason-link">Learn More →</a>
+      </div>
+
+      <div class="reason-card">
+        <div class="reason-icon">🏆</div>
+        <span class="reason-tag">REWARDS</span>
+        <h3>Get Exclusive Rewards as a Preferred Partner</h3>
+        <p>Our built-in rewards program grants you exclusive benefits like higher commission, priority service, access to high-profile events, and much more. Level up your status to discover elite benefits!</p>
+        <a href="#" class="reason-link">Read More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits-section">
+    <h2 class="section-title">Preferred Partner Benefits</h2>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <div class="benefit-icon">🎯</div>
+        <div class="benefit-label">Priority Service</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">💰</div>
+        <div class="benefit-label">Higher Commission</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">📚</div>
+        <div class="benefit-label">Upskilling Opportunities</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="partners-section">
+    <h2 class="section-title">Trusted by 1,500+ Universities, Colleges, and Schools Worldwide</h2>
+    
+    <div class="partners-tabs">
+      <button class="partner-tab active" data-country="canada">Canada</button>
+      <button class="partner-tab" data-country="usa">United States</button>
+      <button class="partner-tab" data-country="uk">United Kingdom</button>
+      <button class="partner-tab" data-country="australia">Australia</button>
+      <button class="partner-tab" data-country="germany">Germany</button>
+      <button class="partner-tab" data-country="ireland">Ireland</button>
+    </div>
+
+    <div class="partners-grid" id="partnersGrid">
+      <!-- Partners will be loaded here -->
+    </div>
+
+    <div class="explore-more">
+      <a href="programs.html" class="explore-btn">Explore More Institutions</a>
+    </div>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section">
+    <div class="testimonial-container">
+      <h2 class="section-title" style="color: white;">Transformative Case Studies</h2>
+      <p class="testimonial-text">"Caya Express has helped me significantly increase my student reach and gives me more school options to offer my students. I also have the added advantage of Caya Express assessing student eligibility, which gives me and my students peace of mind."</p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="register">
+    <h2>Register as a Recruitment Partner</h2>
+    <p>Ready to take your recruitment to the next level of quality, efficiency, and control?</p>
+    
+    <div class="registration-container">
+      <form id="partnerRegistrationForm" class="registration-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="companyName">Company/Agency Name *</label>
+            <input type="text" id="companyName" name="companyName" required>
+          </div>
+          <div class="form-group">
+            <label for="position">Your Position *</label>
+            <input type="text" id="position" name="position" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="country">Country *</label>
+            <select id="country" name="country" required>
+              <option value="">Select your country</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Kenya">Kenya</option>
+              <option value="South Africa">South Africa</option>
+              <option value="India">India</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="China">China</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="city">City *</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="website">Company Website</label>
+            <input type="url" id="website" name="website" placeholder="https://">
+          </div>
+          <div class="form-group">
+            <label for="studentsPerYear">Students Recruited Per Year *</label>
+            <select id="studentsPerYear" name="studentsPerYear" required>
+              <option value="">Select range</option>
+              <option value="1-50">1-50 students</option>
+              <option value="51-100">51-100 students</option>
+              <option value="101-250">101-250 students</option>
+              <option value="251-500">251-500 students</option>
+              <option value="500+">500+ students</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="destinations">Destination Countries of Interest *</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="destinations" value="Canada"> Canada</label>
+            <label><input type="checkbox" name="destinations" value="USA"> United States</label>
+            <label><input type="checkbox" name="destinations" value="UK"> United Kingdom</label>
+            <label><input type="checkbox" name="destinations" value="Australia"> Australia</label>
+            <label><input type="checkbox" name="destinations" value="Germany"> Germany</label>
+            <label><input type="checkbox" name="destinations" value="Ireland"> Ireland</label>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="message">Tell us about your recruitment experience</label>
+          <textarea id="message" name="message" rows="4" placeholder="Share your experience, goals, and why you want to partner with us..."></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label class="checkbox-label">
+            <input type="checkbox" name="terms" required>
+            I agree to the <a href="#" style="color: var(--primary-gold);">Terms and Conditions</a> and <a href="#" style="color: var(--primary-gold);">Privacy Policy</a>
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Registration</button>
+        <div id="formMessage" class="form-message"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="programs.html">Find Programs</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#travel">Travel</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="#">Canada</a></li>
+          <li><a href="#">United States</a></li>
+          <li><a href="#">United Kingdom</a></li>
+          <li><a href="#">Australia</a></li>
+          <li><a href="#">Germany</a></li>
+          <li><a href="#">Ireland</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <ul class="footer-links">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press and Media</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Webinars</a></li>
+          <li><a href="#">Insights</a></li>
+          <li><a href="#">Help Center</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Caya Express Travels. All rights reserved. | <a href="#" style="color: var(--gray-400);">Privacy Policy</a> | <a href="#" style="color: var(--gray-400);">Legal</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const partners = {
+      canada: [
+        { name: "Western University", location: "London, Ontario, CA", description: "Since 1878, Western University has been a choice destination for minds seeking the best education at a research university in Canada. Students at Western can choose from over 400 programs." },
+        { name: "Laurentian University", location: "Sudbury, Ontario, CA", description: "Laurentian University was once only a regional school serving Sudbury, and while it still serves the area well, it has grown into an international leader in niches such as stressed watershed systems." },
+        { name: "Lakehead University", location: "Thunder Bay, Ontario, CA", description: "Lakehead University is small enough to offer the personalized approach to supports and education that allows students to thrive. And they're big enough to embody a truly global perspective." },
+        { name: "University of Toronto", location: "Toronto, Ontario, CA", description: "A globally top-ranked public research university in Toronto, known for innovation and excellence across all major academic disciplines." },
+        { name: "McGill University", location: "Montreal, Quebec, CA", description: "One of Canada's most prestigious universities, offering world-class programs and research opportunities in a bilingual environment." },
+        { name: "University of British Columbia", location: "Vancouver, BC, CA", description: "Ranked among the top 40 universities globally, UBC provides exceptional learning experiences in one of the world's most beautiful cities." }
+      ],
+      usa: [
+        { name: "Southern New Hampshire University", location: "Manchester, New Hampshire, US", description: "Founded in 1932, SNHU is a private, non-profit institution widely recognized as one of the nation's most innovative organizations and fastest growing universities." },
+        { name: "University of Arizona", location: "Tucson, Arizona, US", description: "A Top 100 university in the world and the first institution in the state of Arizona. As one of the most respected research universities in the United States." },
+        { name: "California State University, Northridge", location: "Northridge, California, US", description: "Picture a beautiful campus in sunny Los Angeles with acres of green space, palm trees and contemporary architecture. Add academically competitive programs taught by respected scholars." },
+        { name: "Massachusetts Institute of Technology", location: "Cambridge, Massachusetts, US", description: "World-renowned for science, engineering, and technology education, MIT pushes the boundaries of knowledge and innovation." },
+        { name: "Stanford University", location: "Stanford, California, US", description: "Located in Silicon Valley, Stanford is a leading research university known for entrepreneurship, innovation, and academic excellence." },
+        { name: "Columbia University", location: "New York, New York, US", description: "An Ivy League institution in the heart of New York City, offering unparalleled access to global opportunities and world-class education." }
+      ],
+      uk: [
+        { name: "Bournemouth University", location: "Bournemouth, South West, GB", description: "An innovative and vibrant public university located in Bournemouth, Dorset, a coastal town famous for its seven-mile stretch of sandy beaches." },
+        { name: "University of Greenwich", location: "London, Greater London, GB", description: "Greenwich is more than a collection of individual students and staff, it is a community of people united by their passion for learning." },
+        { name: "University of Edinburgh", location: "Edinburgh, Scotland, GB", description: "Founded in 1583, the University of Edinburgh was the first true civic university in the UK and one of the four ancient universities of Scotland." },
+        { name: "University of Oxford", location: "Oxford, England, GB", description: "The oldest university in the English-speaking world, Oxford is renowned for its tutorial-based learning and world-leading research." },
+        { name: "Imperial College London", location: "London, England, GB", description: "Consistently ranked among the world's best universities, Imperial specializes in science, engineering, medicine and business." },
+        { name: "King's College London", location: "London, England, GB", description: "One of England's oldest and most prestigious universities, known for excellence in humanities, law, sciences and social sciences." }
+      ],
+      australia: [
+        { name: "Griffith University", location: "Southport, Queensland, AU", description: "Founded in 1971, Griffith University has become a highly-ranked university with an international outlook. Teaching and research spans six campuses in South East Queensland." },
+        { name: "La Trobe University", location: "Bundoora, Victoria, AU", description: "Focused on creating a culture of safety, inclusivity, and academic excellence, La Trobe University works to cater to the needs of their community and support students." },
+        { name: "Deakin University", location: "Geelong, Victoria, AU", description: "Founded in 1974, Deakin is ranked in the top 1% of universities worldwide and is one of the top 50 young universities globally." },
+        { name: "University of Melbourne", location: "Melbourne, Victoria, AU", description: "Australia's top-ranked university, offering exceptional programs across all disciplines in one of the world's most liveable cities." },
+        { name: "Australian National University", location: "Canberra, ACT, AU", description: "Australia's national university, ANU is a world-leading institution for research and teaching, located in the nation's capital." },
+        { name: "University of Sydney", location: "Sydney, NSW, AU", description: "Australia's first university and one of the world's leading institutions, known for its beautiful campus and academic excellence." }
+      ],
+      germany: [
+        { name: "Hochschulen Fresenius", location: "Berlin, Berlin, DE", description: "Hochschule Fresenius began as the 'Fresenius Chemical Laboratory' in 1848 and has evolved into a privately owned German university with a long tradition of excellence." },
+        { name: "Mediadesign Hochschule", location: "Berlin, Berlin, DE", description: "For over 35 years, mdh has been guiding students with their expertise and experience into one of the most exciting industries of the present and future." },
+        { name: "University of Europe for Applied Sciences", location: "Iserlohn, Nordrhein-Westfalen, DE", description: "A vibrant and dynamic institution dedicated to providing top-quality education to students from all around the world." },
+        { name: "Technical University of Munich", location: "Munich, Bavaria, DE", description: "One of Europe's top universities, TUM excels in engineering, natural sciences, medicine, and technology education and research." },
+        { name: "Heidelberg University", location: "Heidelberg, Baden-Württemberg, DE", description: "Germany's oldest university, founded in 1386, known for excellence in research and a rich academic tradition." },
+        { name: "RWTH Aachen University", location: "Aachen, North Rhine-Westphalia, DE", description: "One of Germany's leading technical universities, renowned for engineering, natural sciences, and strong industry partnerships." }
+      ],
+      ireland: [
+        { name: "Dublin Business School", location: "Dublin, County of Dublin, IE", description: "Founded in 1975, Dublin Business School specialises in the provision of career-focused education. The school has evolved over the years, expanding offerings to meet various sector demands." },
+        { name: "University College Cork", location: "Cork, County of Cork, IE", description: "On a limestone bluff overlooking the River Lee in Ireland is University College Cork (UCC). Its motto 'Where Finbarr Taught, Let Munster Learn,' refers to 6th century Saint Finbarr." },
+        { name: "Trinity College Dublin", location: "Dublin, County of Dublin, IE", description: "Trinity College Dublin offers undergraduate and postgraduate courses across all major disciplines such as arts, humanities, business, law, engineering, science, and health sciences." },
+        { name: "National University of Ireland, Galway", location: "Galway, County of Galway, IE", description: "Located on Ireland's vibrant west coast, NUI Galway combines academic excellence with a unique cultural experience in a UNESCO City of Film." },
+        { name: "University College Dublin", location: "Dublin, County of Dublin, IE", description: "Ireland's largest university, UCD is a research-intensive institution with a global outlook and strong connections to industry." },
+        { name: "Dublin City University", location: "Dublin, County of Dublin, IE", description: "A young, dynamic university known for innovation, entrepreneurship, and strong links with industry and enterprise." }
+      ]
+    };
+
+    let currentCountry = 'canada';
+
+    function displayPartners(country) {
+      const grid = document.getElementById('partnersGrid');
+      const partnerData = partners[country];
+      
+      grid.innerHTML = partnerData.map(partner => `
+        <div class="partner-card">
+          <h3>${partner.name}</h3>
+          <div class="partner-location">📍 ${partner.location}</div>
+          <p class="partner-description">${partner.description}</p>
+        </div>
+      `).join('');
+    }
+
+    // Tab switching
+    document.querySelectorAll('.partner-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.partner-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const country = tab.dataset.country;
+        currentCountry = country;
+        displayPartners(country);
+      });
+    });
+
+    // Initialize with Canada
+    displayPartners('canada');
+
+    // Smooth scroll for CTA buttons
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Partner Registration Form Submission
+    document.getElementById('partnerRegistrationForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = e.target.querySelector('.submit-btn');
+      const formMessage = document.getElementById('formMessage');
+      
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      formMessage.style.display = 'none';
+      
+      // Get form data
+      const formData = new FormData(e.target);
+      const destinations = [];
+      formData.getAll('destinations').forEach(dest => destinations.push(dest));
+      
+      try {
+        // Check if Firebase is initialized
+        if (!window.firebaseDB || !window.firebaseModules) {
+          throw new Error('Firebase not initialized. Please refresh the page and try again.');
+        }
+
+        const { collection, addDoc, serverTimestamp } = window.firebaseModules;
+        const db = window.firebaseDB;
+
+        const partnerData = {
+          name: `${formData.get('firstName')} ${formData.get('lastName')}`,
+          firstName: formData.get('firstName'),
+          lastName: formData.get('lastName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          company: formData.get('companyName'),
+          position: formData.get('position'),
+          country: formData.get('country'),
+          city: formData.get('city'),
+          website: formData.get('website') || '',
+          studentsPerYear: formData.get('studentsPerYear'),
+          destinations: destinations,
+          message: formData.get('message') || '',
+          status: 'pending',
+          createdAt: serverTimestamp(),
+          submittedAt: new Date().toISOString()
+        };
+
+        console.log('Submitting partner data:', partnerData);
+        
+        // Add timeout for Firebase operation (15 seconds)
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Request timeout - please check your internet connection')), 15000)
+        );
+        
+        // Save to Firebase with timeout
+        await Promise.race([
+          addDoc(collection(db, 'partners'), partnerData),
+          timeoutPromise
+        ]);
+        
+        console.log('Partner registration saved successfully');
+        
+        // Show success message
+        formMessage.style.display = 'block';
+        formMessage.className = 'form-message success';
+        formMessage.textContent = 'Registration submitted successfully! You will receive an email with your login credentials within 24-48 hours after approval.';
+        formMessage.style.background = '#d1fae5';
+        formMessage.style.color = '#065f46';
+        formMessage.style.padding = '1rem';
+        formMessage.style.borderRadius = '8px';
+        formMessage.style.marginTop = '1rem';
+        
+        // Reset form
+        e.target.reset();
+        
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        console.error('Error code:', error.code);
+        console.error('Error message:', error.message);
+        
+        // Show detailed error message
+        let errorMsg = 'There was an error submitting your application. ';
+        if (error.message.includes('Firebase not initialized')) {
+          errorMsg += 'Please refresh the page and try again.';
+        } else if (error.message.includes('timeout')) {
+          errorMsg += 'The request took too long. Please check your internet connection and try again.';
+        } else if (error.code === 'permission-denied' || error.message.includes('permission')) {
+          errorMsg = 'Database access denied. This is a Firebase configuration issue. Please contact the administrator to update Firestore security rules.';
+          console.error('FIRESTORE RULES ERROR: Please update Firebase security rules to allow writes to the partners collection');
+        } else if (error.code === 'unavailable') {
+          errorMsg += 'Service temporarily unavailable. Please try again in a few moments.';
+        } else if (!navigator.onLine) {
+          errorMsg += 'No internet connection. Please check your network and try again.';
+        } else {
+          errorMsg += `Error: ${error.message}. Please contact us at cayaexpresstravels@gmail.com`;
+        }
+        
+        formMessage.style.display = 'block';
+        formMessage.className = 'form-message error';
+        formMessage.textContent = errorMsg;
+        formMessage.style.background = '#fee2e2';
+        formMessage.style.color = '#991b1b';
+        formMessage.style.padding = '1rem';
+        formMessage.style.borderRadius = '8px';
+        formMessage.style.marginTop = '1rem';
+        
+        // Scroll to error message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        formMessage.style.padding = '1rem';
+        formMessage.style.borderRadius = '8px';
+        formMessage.style.marginTop = '1rem';
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Registration';
+      }
+    });
+  </script>
+
+  <!-- (duplicate mobile menu script removed - already present in head) -->
+
+  <!-- Caya.ai compact Chatbot (injected) -->
+  <script src="caya-ai-fixed.js"></script>
+  <style>
+    .caya-chatbot-container{position:fixed;bottom:20px;right:20px;z-index:9999;font-family:Inter, sans-serif}
+    .caya-chat-button{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#c49b2c);border:3px solid #fff;box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer}
+    .caya-chatbox{position:fixed;bottom:100px;right:20px;width:340px;max-width:calc(100vw - 40px);height:480px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);display:none;flex-direction:column;overflow:hidden}
+    .caya-chatbox.active{display:flex}
+    .caya-chat-header{background:#1a237e;color:#fff;padding:12px;display:flex;align-items:center;justify-content:space-between}
+    .caya-chat-messages{flex:1;overflow:auto;padding:12px;background:#f9fafb}
+    .caya-input-area{padding:10px;border-top:1px solid #eee;display:flex;gap:8px}
+    .caya-input{flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:20px}
+    .caya-send{background:linear-gradient(135deg,#D4AF37,#c49b2c);border:none;color:#fff;border-radius:50%;width:44px;height:44px;cursor:pointer}
+    .caya-msg{margin-bottom:10px;display:flex;gap:8px}
+    .caya-msg.bot .bubble{background:#fff;color:#111;padding:8px 12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+    .caya-msg.user{justify-content:flex-end}
+    .caya-msg.user .bubble{background:#1a237e;color:#fff;padding:8px 12px;border-radius:12px}
+  </style>
+  <div class="caya-chatbot-container">
+    <button class="caya-chat-button" id="cayaToggleBtn" aria-label="Chat">🤖</button>
+    <div class="caya-chatbox" id="cayaChatbox">
+      <div class="caya-chat-header"><strong>Caya.ai</strong><button id="cayaClose" style="background:transparent;border:none;color:#fff;font-size:18px;cursor:pointer">×</button></div>
+      <div class="caya-chat-messages" id="cayaMessages"></div>
+      <div class="caya-input-area">
+        <input id="cayaInput" class="caya-input" placeholder="Ask me anything..." />
+        <button class="caya-send" id="cayaSend">➤</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      const toggle = document.getElementById('cayaToggleBtn');
+      const box = document.getElementById('cayaChatbox');
+      const closeBtn = document.getElementById('cayaClose');
+      const sendBtn = document.getElementById('cayaSend');
+      const input = document.getElementById('cayaInput');
+      const messages = document.getElementById('cayaMessages');
+
+      function appendMsg(text, who){
+        const d = document.createElement('div'); d.className = 'caya-msg ' + (who==='user'?'user':'bot');
+        const b = document.createElement('div'); b.className = 'bubble'; b.innerText = text;
+        d.appendChild(b); messages.appendChild(d); messages.scrollTop = messages.scrollHeight;
+      }
+
+      function getResponse(msg){
+        if(typeof cayaAI !== 'undefined' && typeof cayaAI.generateResponse === 'function'){
+          try{ const r = cayaAI.generateResponse(msg); return (r && r.response)? r.response : 'Sorry, I could not process that.'; }catch(e){return 'Sorry, something went wrong.'}
+        }
+        return 'Hi — Caya.ai is not loaded here. Please visit the homepage for full chat features.';
+      }
+
+      toggle.addEventListener('click', function(){ box.classList.toggle('active'); if(box.classList.contains('active') && messages.children.length===0){ setTimeout(()=>appendMsg(getResponse(''), 'bot'),400); } });
+      closeBtn.addEventListener('click', ()=>box.classList.remove('active'));
+      sendBtn.addEventListener('click', ()=>{ const v=input.value.trim(); if(!v) return; appendMsg(v,'user'); input.value=''; setTimeout(()=>appendMsg(getResponse(v),'bot'),300); });
+      input.addEventListener('keypress', function(e){ if(e.key==='Enter'){ sendBtn.click(); } });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│   🚀 CAYA EXPRESS TRAVELS - DEPLOYMENT CHECKLIST           │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+✅ = Complete    ⏳ = In Progress    ⬜ = Not Started
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 1: PREPARE BACKEND
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Updated package.json with proper start script
+✅ Created README.md for backend
+✅ Server.js configured for production (0.0.0.0 binding)
+✅ CORS configured for production domains
+✅ Environment variables ready
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 2: DEPLOY BACKEND TO RENDER.COM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⬜ Step 1: Go to https://render.com
+⬜ Step 2: Sign up / Login
+⬜ Step 3: Click "New +" → "Web Service"
+⬜ Step 4: Choose deployment method (GitHub or Manual)
+⬜ Step 5: Configure settings:
+         - Name: caya-duffel-backend
+         - Environment: Node
+         - Build: npm install
+         - Start: node server.js
+⬜ Step 6: Add Environment Variables:
+         - DUFFEL_API_KEY = (your key)
+         - EMAIL_USER = cayaexpresstravels@gmail.com
+         - EMAIL_PASSWORD = (your password)
+⬜ Step 7: Click "Create Web Service"
+⬜ Step 8: Wait for deployment (2-5 minutes)
+⬜ Step 9: COPY YOUR BACKEND URL! 
+         Example: https://caya-duffel-backend.onrender.com
+
+📝 My Backend URL: ________________________________________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 3: UPDATE FRONTEND CONFIGURATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⬜ Step 1: Open frontend/travel.html
+⬜ Step 2: Find line 950 (API_BASE_URL)
+⬜ Step 3: Replace with your backend URL
+⬜ Step 4: Save file
+
+OR RUN THIS COMMAND:
+> .\update-deployment-urls.ps1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 4: DEPLOY FRONTEND TO NETLIFY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⬜ Step 1: Go to https://netlify.com
+⬜ Step 2: Sign up / Login
+⬜ Step 3: Click "Add new site" → "Deploy manually"
+⬜ Step 4: Drag the ENTIRE "frontend" folder
+⬜ Step 5: Wait 30 seconds
+⬜ Step 6: COPY YOUR FRONTEND URL!
+         Example: https://caya-travels.netlify.app
+⬜ Step 7: (Optional) Customize site name in settings
+
+📝 My Frontend URL: ________________________________________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 5: UPDATE BACKEND CORS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⬜ Step 1: Open caya-duffel-backend/server.js
+⬜ Step 2: Find allowedOrigins array (line ~21)
+⬜ Step 3: Add your frontend URLs
+⬜ Step 4: Save file
+⬜ Step 5: Go to Render dashboard
+⬜ Step 6: Click "Manual Deploy" → "Deploy latest commit"
+
+OR RUN THIS COMMAND:
+> .\update-deployment-urls.ps1
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PHASE 6: TEST YOUR LIVE WEBSITE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⬜ Step 1: Visit your frontend URL
+⬜ Step 2: Press F12 to open Console
+⬜ Step 3: Check for "API Base URL: https://..."
+⬜ Step 4: Fill in flight search form
+⬜ Step 5: Click "Search Flights"
+⬜ Step 6: Verify prices show in Naira (₦)
+⬜ Step 7: Test reservation form
+
+EXPECTED RESULTS:
+✓ No "Failed to fetch" errors
+✓ No CORS errors
+✓ Flights load successfully
+✓ Prices display in Nigerian Naira (₦)
+✓ Passenger counters work (adults, children, infants)
+✓ Reservation modal opens and submits
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 CONGRATULATIONS!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your flight booking website is now LIVE on the internet!
+
+Share your website: ________________________________________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📞 NEED HELP?
+
+Run these helper scripts:
+> .\deploy-helper.ps1        (Step-by-step guide)
+> .\update-deployment-urls.ps1   (Auto-update URLs)
+
+Or check these files:
+- DEPLOY_NOW.md (Detailed instructions)
+- DEPLOYMENT_GUIDE.md (Complete guide)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

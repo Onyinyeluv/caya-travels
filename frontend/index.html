@@ -1,0 +1,1602 @@
+https://cayaexpresstravel.com/admin-partners.html<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Caya Express - Study Abroad | Visa & Tours | Flight Ticketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #D4AF37;
+      --dark-blue: #1a237e;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-800);
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-700);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-gold);
+      margin: 3px 0;
+      transition: all 0.3s;
+      border-radius: 3px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, rgba(26, 35, 126, 0.85) 0%, rgba(40, 53, 147, 0.85) 100%),
+                  url('images/airplane .jpg') center/cover no-repeat;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      background: linear-gradient(to right, white, var(--primary-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    /* Services Grid */
+    .services-section {
+      padding: 6rem 2rem;
+      background: var(--gray-50);
+    }
+
+    .services-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      font-size: 1.25rem;
+      color: var(--gray-600);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary-gold), #f0c14b);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      border-color: var(--primary-gold);
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    .service-card h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      font-size: 1.1rem;
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .service-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .service-features li {
+      padding: 0.75rem 0;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .service-features li::before {
+      content: '✓';
+      color: var(--primary-gold);
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    .service-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: var(--primary-gold);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .service-btn:hover {
+      background: #C5A028;
+      transform: translateX(5px);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #283593 100%);
+      padding: 5rem 2rem;
+      color: white;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--primary-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-item p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+    }
+
+    /* Why Choose Us */
+    .why-section {
+      padding: 6rem 2rem;
+      background: white;
+    }
+
+    .why-grid {
+      max-width: 1400px;
+      margin: 3rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .why-card {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .why-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .why-card h4 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+    }
+
+    .why-card p {
+      color: var(--gray-600);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(26, 35, 126, 0.95) 0%, rgba(40, 53, 147, 0.95) 100%),
+                  url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&q=80') center/cover no-repeat;
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .cta-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-content h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-content p {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 3rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 1.25rem 3rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .cta-btn.primary {
+      background: var(--primary-gold);
+      color: white;
+    }
+
+    .cta-btn.primary:hover {
+      background: #C5A028;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    }
+
+    .cta-btn.secondary {
+      background: white;
+      color: var(--gray-900);
+      border: 2px solid var(--gray-300);
+    }
+
+    .cta-btn.secondary:hover {
+      border-color: var(--primary-gold);
+      color: var(--primary-gold);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gray-900);
+      color: white;
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-about h3 {
+      color: var(--primary-gold);
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .footer-about p {
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-section h4 {
+      color: var(--primary-gold);
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 1rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .service-portals {
+      background: var(--gray-800);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
+
+    .service-portals h4 {
+      color: var(--primary-gold);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .portal-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .portal-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--gray-700);
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .portal-link:hover {
+      background: var(--gray-600);
+      border-color: var(--primary-gold);
+      transform: translateX(5px);
+    }
+
+    .portal-icon {
+      font-size: 2rem;
+    }
+
+    .portal-info h5 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .portal-info p {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-700);
+      color: var(--gray-400);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    }
+
+    @media (max-width: 1024px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 6rem 2rem 2rem;
+        gap: 1rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 100;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: left;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .logo span {
+        font-size: 1rem !important;
+      }
+
+      .logo img {
+        height: 60px !important;
+      }
+
+      .cta-content h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 90px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+      </a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="#services" onclick="closeMenu()">Our Services</a></li>
+        <li><a href="#about" onclick="closeMenu()">About Us</a></li>
+        <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        <li><a href="agent-portal.html" onclick="closeMenu()">Agent Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Your Gateway to Global Opportunities</h1>
+      <p>Study Abroad • Visa Assistance • International Travel • Flight Ticketing</p>
+      <p style="font-size: 1.1rem; margin-top: 1rem;">We help you achieve your travel and education dreams</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section" id="services">
+    <div class="services-container">
+      <div class="section-header">
+        <h2>Choose Your Service</h2>
+        <p>Explore our four specialized portals designed to meet all your international travel and education needs</p>
+      </div>
+
+      <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        <!-- Study Abroad Portal -->
+        <div class="service-card" onclick="window.location.href='study-abroad.html'">
+          <div class="service-image" style="background: url('images/students .jpg') center/cover; height: 180px; border-radius: 10px 10px 0 0; margin: -20px -20px 20px -20px;"></div>
+          <h3>Study Abroad</h3>
+          <p>Access world-class education programs across top universities in Canada, USA, UK, Australia, and more.</p>
+          <ul class="service-features">
+            <li>150,000+ Global Study Programs</li>
+            <li>University Application Support</li>
+            <li>Admission Letter Processing</li>
+            <li>Student Visa Assistance</li>
+            <li>Pre-Departure Guidance</li>
+            <li>Scholarship Opportunities</li>
+          </ul>
+          <a href="study-abroad.html" class="service-btn">
+            <span>Explore Programs</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Visa Services Portal -->
+        <div class="service-card" onclick="window.location.href='visa.html'">
+          <div class="service-image" style="background: url('images/tourist .jpg') center/cover; height: 180px; border-radius: 10px 10px 0 0; margin: -20px -20px 20px -20px;"></div>
+          <h3>Visa Processing</h3>
+          <p>Professional visa processing services for tourist, business, family visits, and all visa types worldwide.</p>
+          <ul class="service-features">
+            <li>Tourist Visa Processing</li>
+            <li>Business Visa Support</li>
+            <li>Family Visit Visas</li>
+            <li>Transit & Work Visas</li>
+            <li>95% Success Rate</li>
+            <li>Expert Consultation</li>
+          </ul>
+          <a href="visa.html" class="service-btn">
+            <span>Apply for Visa</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Tour Packages Portal -->
+        <div class="service-card" onclick="window.location.href='tours.html'">
+          <div class="service-image" style="background: url('images/tour1.jpg') center/cover; height: 180px; border-radius: 10px 10px 0 0; margin: -20px -20px 20px -20px;"></div>
+          <h3>Tour Packages</h3>
+          <p>Curated tour packages for unforgettable experiences - beach resorts, cultural tours, and adventure trips.</p>
+          <ul class="service-features">
+            <li>Customized Tour Packages</li>
+            <li>Beach & Resort Holidays</li>
+            <li>Cultural Heritage Tours</li>
+            <li>Adventure & Safari</li>
+            <li>Hotel & Accommodation</li>
+            <li>Travel Insurance</li>
+          </ul>
+          <a href="tours.html" class="service-btn">
+            <span>View Packages</span>
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Flight Ticketing Portal -->
+        <div class="service-card" onclick="window.location.href='travel.html'">
+          <div class="service-image" style="background: url('images/couple-pulling-luggage-hotel.jpg') center/cover; height: 180px; border-radius: 10px 10px 0 0; margin: -20px -20px 20px -20px;"></div>
+          <h3>Flight Ticketing</h3>
+          <p>Book international flights at competitive rates with instant confirmation and 24/7 customer support.</p>
+          <ul class="service-features">
+            <li>Best Airfare Deals</li>
+            <li>Multiple Airlines Options</li>
+            <li>Flexible Booking Options</li>
+            <li>Group Travel Discounts</li>
+            <li>Travel Date Changes</li>
+            <li>Priority Customer Service</li>
+          </ul>
+          <a href="travel.html" class="service-btn">
+            <span>Book Flights</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item">
+        <h3>5,000+</h3>
+        <p>Happy Customers</p>
+      </div>
+      <div class="stat-item">
+        <h3>95%</h3>
+        <p>Success Rate</p>
+      </div>
+      <div class="stat-item">
+        <h3>24/7</h3>
+        <p>Support</p>
+      </div>
+      <div class="stat-item">
+        <h3>100%</h3>
+        <p>Dedicated</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-section" id="about">
+    <div class="services-container">
+      <div class="section-header">
+        <h2>Why Choose Caya Express?</h2>
+        <p>We're here to help make your travel and education goals a reality</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <h4>Experienced Team</h4>
+          <p>Our team has years of experience helping people like you achieve their travel and study abroad goals.</p>
+        </div>
+        <div class="why-card">
+          <h4>Fair Prices</h4>
+          <p>We offer good rates with no hidden charges. You know exactly what you're paying for.</p>
+        </div>
+        <div class="why-card">
+          <h4>Fast Service</h4>
+          <p>We work quickly on your applications and bookings because we know time is important.</p>
+        </div>
+        <div class="why-card">
+          <h4>Safe & Trustworthy</h4>
+          <p>Your documents and information are safe with us. We handle everything professionally.</p>
+        </div>
+        <div class="why-card">
+          <h4>Good Results</h4>
+          <p>Many people have successfully used our services. We're proud of our track record.</p>
+        </div>
+        <div class="why-card">
+          <h4>Full Support</h4>
+          <p>We help you from start to finish. You can always reach us when you need help.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" id="contact">
+    <div class="cta-content">
+      <h2>Ready to Start Your Journey?</h2>
+      <p>Whether you're looking to study abroad, explore new destinations, or book your next flight, we're here to help make it happen.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/2348101549916" class="cta-btn primary" target="_blank">
+          <span>Chat on WhatsApp</span>
+        </a>
+        <a href="mailto:cayaexpresstravels@gmail.com" class="cta-btn secondary">
+          <span>Email Us</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-about">
+        <h3>Caya Express</h3>
+        <p>Your trusted partner for international education, visa processing, tour packages, and flight bookings. We turn your global aspirations into reality.</p>
+        <div class="service-portals">
+          <h4>Quick Access to Our Services</h4>
+          <div class="portal-links">
+            <a href="study-abroad.html" class="portal-link">
+              <div class="portal-info">
+                <h5>Study Abroad Portal</h5>
+                <p>University programs & admissions</p>
+              </div>
+            </a>
+            <a href="visa.html" class="portal-link">
+              <div class="portal-info">
+                <h5>Visa Processing Portal</h5>
+                <p>All visa types & applications</p>
+              </div>
+            </a>
+            <a href="tours.html" class="portal-link">
+              <div class="portal-info">
+                <h5>Tour Packages Portal</h5>
+                <p>Curated travel experiences</p>
+              </div>
+            </a>
+            <a href="travel.html" class="portal-link">
+              <div class="portal-info">
+                <h5>Flight Ticketing Portal</h5>
+                <p>International flight bookings</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="partner.html">Partner With Us</a></li>
+          <li><a href="agent-portal.html">Agent Portal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Study Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="study-abroad.html">Canada</a></li>
+          <li><a href="study-abroad.html">United States</a></li>
+          <li><a href="study-abroad.html">United Kingdom</a></li>
+          <li><a href="study-abroad.html">Australia</a></li>
+          <li><a href="study-abroad.html">Germany</a></li>
+          <li><a href="study-abroad.html">Ireland</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul class="footer-links">
+          <li><strong>Email:</strong></li>
+          <li>cayaexpresstravels@gmail.com</li>
+          <li>info@cayaexpresstravel.com</li>
+          <li style="margin-top: 0.5rem;"><strong>Phone:</strong></li>
+          <li>+234 810 154 9916</li>
+          <li>+234 916 000 3177</li>
+          <li>+234 706 543 3796</li>
+          <li style="margin-top: 0.5rem;"><strong>Address:</strong></li>
+          <li>Road 1, B70, Ikota Shopping Complex,</li>
+          <li>V.G.C Ajah Lagos, Nigeria</li>
+          <li style="margin-top: 1rem;">
+            <a href="https://wa.me/2348101549916" target="_blank" style="color: #25D366;">WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Caya Express Travels. All rights reserved. | <a href="#" style="color: var(--gray-400);">Privacy Policy</a> | <a href="#" style="color: var(--gray-400);">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <!-- Caya.ai Chatbot -->
+  <script src="caya-ai-fixed.js"></script>
+  <script>
+    console.log('Caya.ai loaded:', typeof cayaAI !== 'undefined');
+    if (typeof cayaAI !== 'undefined') {
+      console.log('Caya AI is ready!');
+    } else {
+      console.error('Caya AI failed to load!');
+    }
+  </script>
+  
+  <style>
+    /* Chatbot Styles */
+    .caya-chatbot-container {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 10000;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .caya-chat-button {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D4AF37 0%, #c49b2c 100%);
+      border: 3px solid white;
+      box-shadow: 0 6px 30px rgba(212, 175, 55, 0.6);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .caya-chat-button:hover {
+      transform: scale(1.15);
+      box-shadow: 0 8px 35px rgba(212, 175, 55, 0.8);
+    }
+
+    .caya-notification-badge {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #ef4444;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      border: 2px solid white;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    .caya-chatbox {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 380px;
+      height: 550px;
+      max-width: calc(100vw - 40px);
+      max-height: calc(100vh - 140px);
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .caya-chatbox.active {
+      display: flex;
+    }
+
+    .caya-chat-header {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .caya-chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .caya-chat-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .caya-chat-header h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .caya-chat-status {
+      font-size: 12px;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .caya-close-btn {
+      background: rgba(255, 69, 0, 0.9);
+      border: 2px solid white;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .caya-close-btn:hover {
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(1.15);
+    }
+
+    .caya-minimize-btn {
+      background: rgba(255, 165, 0, 0.9);
+      border: 2px solid white;
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 28px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+      line-height: 1;
+      padding-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .caya-minimize-btn:hover {
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(1.15);
+    }
+
+    .caya-chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background: #f9fafb;
+    }
+
+    .caya-message {
+      margin-bottom: 15px;
+      display: flex;
+      gap: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .caya-message.bot {
+      flex-direction: row;
+    }
+
+    .caya-message.user {
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D4AF37 0%, #c49b2c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .message-avatar.user-avatar {
+      background: #1a237e;
+    }
+
+    .message-content {
+      max-width: 75%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .caya-message.bot .message-content {
+      background: white;
+      color: #1f2937;
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .caya-message.user .message-content {
+      background: #1a237e;
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .caya-typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 18px;
+      width: fit-content;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #9ca3af;
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-10px); }
+    }
+
+    .caya-chat-input-area {
+      padding: 15px 20px;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .caya-quick-options {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+
+    .quick-option-btn {
+      padding: 6px 12px;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .quick-option-btn:hover {
+      background: #D4AF37;
+      color: white;
+      border-color: #D4AF37;
+    }
+
+    .caya-input-wrapper {
+      display: flex;
+      gap: 10px;
+    }
+
+    .caya-chat-input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 25px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .caya-chat-input:focus {
+      border-color: #D4AF37;
+    }
+
+    .caya-send-btn {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #D4AF37 0%, #c49b2c 100%);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      .caya-chatbot-container {
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .caya-chat-button {
+        width: 65px;
+        height: 65px;
+      }
+
+      .caya-notification-badge {
+        font-size: 11px;
+        padding: 3px 7px;
+      }
+
+      .caya-chatbox {
+        bottom: 90px;
+        right: 15px;
+        left: 15px;
+        width: calc(100vw - 30px);
+        height: calc(100vh - 130px);
+        max-width: 100%;
+      }
+
+      .caya-chat-header {
+        padding: 12px 15px;
+      }
+
+      .caya-chat-header h3 {
+        font-size: 15px;
+      }
+
+      .caya-chat-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+      }
+
+      .caya-close-btn,
+      .caya-minimize-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+      }
+
+      .quick-option-btn {
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+
+      .caya-chat-input {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .caya-send-btn {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  </style>
+
+  <!-- Chatbot HTML -->
+  <div class="caya-chatbot-container">
+    <button class="caya-chat-button" onclick="toggleChat()" title="Chat with Caya.ai">
+      <span class="caya-notification-badge">AI</span>
+      <span style="font-size: 38px;">🤖</span>
+    </button>
+
+    <div class="caya-chatbox" id="cayaChatbox">
+      <div class="caya-chat-header">
+        <div class="caya-chat-header-info">
+          <div class="caya-chat-avatar">🤖</div>
+          <div>
+            <h3>Caya.ai</h3>
+            <div class="caya-chat-status">
+              <span class="status-dot"></span>
+              <span>Online</span>
+            </div>
+          </div>
+        </div>
+        <button class="caya-close-btn" onclick="toggleChat()" title="Close Chat">×</button>
+        <button class="caya-minimize-btn" onclick="minimizeChat()" title="Minimize">−</button>
+      </div>
+
+      <div class="caya-chat-messages" id="cayaMessages"></div>
+
+      <div class="caya-chat-input-area">
+        <div class="caya-quick-options">
+          <button class="quick-option-btn" onclick="sendQuick('What is a transit visa?')">Transit Visa</button>
+          <button class="quick-option-btn" onclick="sendQuick('Study in Canada')">Study Abroad</button>
+          <button class="quick-option-btn" onclick="sendQuick('Book flight to Dubai')">Book Flights</button>
+          <button class="quick-option-btn" onclick="sendQuick('Tour packages')">Tour Packages</button>
+          <button class="quick-option-btn" onclick="sendQuick('Contact details')">Contact Us</button>
+        </div>
+        <div class="caya-input-wrapper">
+          <input 
+            type="text" 
+            class="caya-chat-input" 
+            id="cayaInput" 
+            placeholder="Ask me anything..."
+            onkeypress="if(event.key==='Enter') sendMessage()"
+          >
+          <button class="caya-send-btn" onclick="sendMessage()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let chatHistory = [];
+    let inactivityTimer = null;
+
+    function toggleChat() {
+      const chatbox = document.getElementById('cayaChatbox');
+      
+      if (!chatbox) {
+        console.error('Chatbox element not found!');
+        return;
+      }
+      
+      const isOpening = !chatbox.classList.contains('active');
+      chatbox.classList.toggle('active');
+      
+      // If opening for the first time, show welcome message
+      if (isOpening && chatHistory.length === 0) {
+        setTimeout(() => {
+          if (typeof cayaAI !== 'undefined') {
+            addBotMsg(cayaAI.generateResponse('').response);
+          } else {
+            addBotMsg('👋 Hi! I\'m Caya.ai, your intelligent travel assistant!\n\nI can help you with:\n🎓 Study Abroad Programs\n✈️ Flight Bookings\n🛂 Transit Visa Information\n🌍 Tour Packages\n\nHow can I assist you today?');
+          }
+        }, 500);
+      }
+      
+      // Start or stop inactivity timer
+      if (isOpening) {
+        resetInactivityTimer();
+      } else {
+        clearInactivityTimer();
+      }
+    }
+
+    function resetInactivityTimer() {
+      clearInactivityTimer();
+      inactivityTimer = setTimeout(() => {
+        const chatbox = document.getElementById('cayaChatbox');
+        if (chatbox && chatbox.classList.contains('active')) {
+          chatbox.classList.remove('active');
+          addBotMsg('Chat closed due to inactivity. Click the AI button to chat again! 😊');
+        }
+      }, 300000); // 5 minutes = 300000ms
+    }
+
+    function clearInactivityTimer() {
+      if (inactivityTimer) {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = null;
+      }
+    }
+
+    function minimizeChat() {
+      const chatbox = document.getElementById('cayaChatbox');
+      if (chatbox) {
+        chatbox.classList.remove('active');
+        clearInactivityTimer();
+      }
+    }
+
+    function addBotMsg(msg) {
+      const container = document.getElementById('cayaMessages');
+      const div = document.createElement('div');
+      div.className = 'caya-message bot';
+      div.innerHTML = `
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">${formatMsg(msg)}</div>
+      `;
+      container.appendChild(div);
+      scrollDown();
+    }
+
+    function addUserMsg(msg) {
+      const container = document.getElementById('cayaMessages');
+      const div = document.createElement('div');
+      div.className = 'caya-message user';
+      div.innerHTML = `
+        <div class="message-avatar user-avatar">👤</div>
+        <div class="message-content">${msg}</div>
+      `;
+      container.appendChild(div);
+      scrollDown();
+    }
+
+    function showTyping() {
+      const container = document.getElementById('cayaMessages');
+      const div = document.createElement('div');
+      div.className = 'caya-message bot';
+      div.id = 'typing';
+      div.innerHTML = `
+        <div class="message-avatar">🤖</div>
+        <div class="caya-typing-indicator">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      `;
+      container.appendChild(div);
+      scrollDown();
+    }
+
+    function removeTyping() {
+      const typing = document.getElementById('typing');
+      if (typing) typing.remove();
+    }
+
+    function formatMsg(msg) {
+      return msg
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>')
+        .replace(/• /g, '&nbsp;&nbsp;• ');
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('cayaInput');
+      const msg = input.value.trim();
+      
+      if (msg === '') return;
+      
+      // Reset inactivity timer on user interaction
+      resetInactivityTimer();
+      
+      addUserMsg(msg);
+      chatHistory.push({ type: 'user', msg });
+      input.value = '';
+      
+      showTyping();
+      
+      setTimeout(() => {
+        removeTyping();
+        if (typeof cayaAI !== 'undefined') {
+          const response = cayaAI.generateResponse(msg);
+          addBotMsg(response.response);
+          chatHistory.push({ type: 'bot', msg: response.response });
+        } else {
+          addBotMsg('I apologize, but I\'m having trouble connecting. Please call us at +234 810 154 9916 or +234 916 000 3177 for assistance.');
+        }
+      }, 1000 + Math.random() * 1000);
+    }
+
+    function sendQuick(msg) {
+      document.getElementById('cayaInput').value = msg;
+      sendMessage();
+    }
+
+    function scrollDown() {
+      const container = document.getElementById('cayaMessages');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Pre-load AI information
+    window.addEventListener('DOMContentLoaded', function() {
+      if (typeof cayaAI !== 'undefined') {
+        console.log('Caya AI loaded with full knowledge base');
+        console.log('Available services: Transit Visas, Study Abroad (Canada, USA, UK, Australia), Flight Bookings, Tour Packages');
+      }
+    });
+
+    // Auto-open after 3 seconds
+    setTimeout(() => {
+      if (typeof toggleChat === 'function') {
+        toggleChat();
+      }
+    }, 3000);
+
+    // Mobile Menu Functions
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
+      
+      if (!isClickInside && navMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>

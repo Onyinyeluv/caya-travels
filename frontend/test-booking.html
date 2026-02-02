@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Test - Caya Express Travels</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f3f4f6;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #1a237e;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .test-section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1a237e;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      border-bottom: 2px solid #D4AF37;
+      padding-bottom: 0.5rem;
+    }
+
+    .test-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #D4AF37;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .passenger-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .passenger-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #D4AF37;
+      background: white;
+      color: #D4AF37;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .passenger-btn:hover {
+      background: #D4AF37;
+      color: white;
+    }
+
+    .passenger-btn:active {
+      transform: scale(0.95);
+    }
+
+    .passenger-count {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a237e;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .status {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    .status.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #6ee7b7;
+    }
+
+    .status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    .status.info {
+      background: #dbeafe;
+      color: #0c2d6b;
+      border: 1px solid #93c5fd;
+    }
+
+    button.test-btn {
+      background: #1a237e;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    button.test-btn:hover {
+      background: #283593;
+    }
+
+    .results {
+      background: #f9fafb;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      margin-top: 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .airport-option {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .airport-option:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✈️ Caya Express Travels - Booking System Test</h1>
+
+    <!-- Test 1: Passenger Counter -->
+    <div class="test-section">
+      <h2>Test 1: Passenger Counter Buttons</h2>
+      
+      <div class="test-group">
+        <label>Adults (12+):</label>
+        <div class="passenger-controls">
+          <button type="button" class="passenger-btn" onclick="testUpdatePassengers(event, 'adults', -1)">−</button>
+          <span class="passenger-count" id="adultsCount">1</span>
+          <button type="button" class="passenger-btn" onclick="testUpdatePassengers(event, 'adults', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="test-group">
+        <label>Children (2-11):</label>
+        <div class="passenger-controls">
+          <button type="button" class="passenger-btn" onclick="testUpdatePassengers(event, 'children', -1)">−</button>
+          <span class="passenger-count" id="childrenCount">0</span>
+          <button type="button" class="passenger-btn" onclick="testUpdatePassengers(event, 'children', 1)">+</button>
+        </div>
+      </div>
+
+      <div class="test-group">
+        <label>Infants (0-2):</label>
+        <div class="passenger-controls">
+          <button type="button" class="passenger-btn" onclick="testUpdatePassengers(event, 'infants', -1)">−</button>
+          <span class="passenger-count" id="infantsCount">0</span>
+          <button type="button" class="passenger-btn" onclick="testUpdatePassengers(event, 'infants', 1)">+</button>
+        </div>
+      </div>
+
+      <div id="passengerStatus" class="status info" style="display:none;"></div>
+    </div>
+
+    <!-- Test 2: Airport Autocomplete -->
+    <div class="test-section">
+      <h2>Test 2: Airport Autocomplete</h2>
+      
+      <div class="test-group">
+        <label>From Airport (type to search):</label>
+        <input 
+          type="text" 
+          id="testAirportFrom" 
+          placeholder="e.g., Lagos, London, New York..." 
+          list="testAirportOptions"
+          oninput="testUpdateAirportOptions()"
+        >
+        <datalist id="testAirportOptions"></datalist>
+      </div>
+
+      <button class="test-btn" onclick="testLoadAirports()">Load Airports (Check Console)</button>
+      
+      <div id="airportStatus" class="status info" style="display:none;"></div>
+      <div id="airportResults" class="results" style="display:none;"></div>
+    </div>
+
+    <!-- Test 3: API Connection -->
+    <div class="test-section">
+      <h2>Test 3: Backend Connection</h2>
+      
+      <button class="test-btn" onclick="testBackendConnection()">Test Backend Connection</button>
+      
+      <div id="apiStatus" class="status" style="display:none;"></div>
+    </div>
+
+    <!-- Console Log Output -->
+    <div class="test-section">
+      <h2>Console Output</h2>
+      <div id="consoleOutput" class="results" style="height: 200px;"></div>
+    </div>
+  </div>
+
+  <script>
+    let testPassengers = { adults: 1, children: 0, infants: 0 };
+    let testAirportsIndex = [];
+    let consoleLog = [];
+
+    // Override console.log to capture output
+    const originalLog = console.log;
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      const message = args.map(arg => 
+        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+      ).join(' ');
+      consoleLog.push(`[${new Date().toLocaleTimeString()}] ${message}`);
+      const output = document.getElementById('consoleOutput');
+      output.textContent = consoleLog.slice(-50).join('\n');
+      output.scrollTop = output.scrollHeight;
+    };
+
+    console.log("🧪 Test Suite Loaded");
+    console.log("Current Passengers:", testPassengers);
+
+    function testUpdatePassengers(evt, type, change) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      
+      const current = testPassengers[type];
+      const newValue = current + change;
+
+      console.log(`Attempting to update ${type}: ${current} + ${change} = ${newValue}`);
+
+      // Validation
+      if (type === 'adults' && newValue < 1) {
+        console.warn("Adults must be at least 1");
+        return;
+      }
+      if (newValue < 0) {
+        console.warn(`${type} cannot be negative`);
+        return;
+      }
+      if (type === 'infants' && newValue > testPassengers.adults) {
+        console.warn('Number of infants cannot exceed number of adults');
+        return;
+      }
+
+      testPassengers[type] = newValue;
+      document.getElementById(`${type}Count`).textContent = newValue;
+      
+      console.log(`✅ Updated ${type} to ${newValue}`, testPassengers);
+      
+      const statusDiv = document.getElementById('passengerStatus');
+      statusDiv.textContent = `✅ Passengers Updated: ${JSON.stringify(testPassengers)}`;
+      statusDiv.style.display = 'block';
+      statusDiv.className = 'status success';
+    }
+
+    async function testLoadAirports() {
+      console.log("Loading airports...");
+      try {
+        const response = await fetch('airports.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+
+        testAirportsIndex = Object.values(data)
+          .filter(a => a.iata && a.iata.length === 3)
+          .map(a => ({
+            iata: a.iata,
+            name: a.name,
+            city: a.city || a.name,
+            country: a.country
+          }));
+
+        console.log(`✅ Loaded ${testAirportsIndex.length} airports`);
+        console.log("Sample airports:", testAirportsIndex.slice(0, 5));
+
+        const statusDiv = document.getElementById('airportStatus');
+        statusDiv.textContent = `✅ Successfully loaded ${testAirportsIndex.length} airports`;
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'status success';
+
+      } catch (error) {
+        console.error("❌ Failed to load airports:", error);
+        const statusDiv = document.getElementById('airportStatus');
+        statusDiv.textContent = `❌ Error: ${error.message}`;
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'status error';
+      }
+    }
+
+    function testUpdateAirportOptions() {
+      const input = document.getElementById('testAirportFrom');
+      const datalist = document.getElementById('testAirportOptions');
+      const query = input.value.trim().toLowerCase();
+
+      console.log(`Searching for: "${query}"`);
+
+      if (!query || !testAirportsIndex.length) {
+        datalist.innerHTML = '';
+        return;
+      }
+
+      const matches = testAirportsIndex
+        .filter(a =>
+          a.iata.toLowerCase().includes(query) ||
+          (a.city && a.city.toLowerCase().includes(query)) ||
+          (a.name && a.name.toLowerCase().includes(query)) ||
+          (a.country && a.country.toLowerCase().includes(query))
+        )
+        .slice(0, 20);
+
+      console.log(`Found ${matches.length} matching airports`);
+
+      datalist.innerHTML = matches
+        .map(airport => {
+          const label = `${airport.city}${airport.name !== airport.city ? ` - ${airport.name}` : ''}${airport.country ? `, ${airport.country}` : ''} (${airport.iata})`;
+          return `<option value="${label}"></option>`;
+        })
+        .join("");
+
+      const resultsDiv = document.getElementById('airportResults');
+      resultsDiv.innerHTML = matches
+        .map(a => `<div class="airport-option"><strong>${a.iata}</strong> - ${a.city}, ${a.country}</div>`)
+        .join("");
+      resultsDiv.style.display = matches.length > 0 ? 'block' : 'none';
+    }
+
+    async function testBackendConnection() {
+      console.log("Testing backend connection...");
+      try {
+        const response = await fetch('http://localhost:3000/', { mode: 'no-cors' });
+        console.log(`✅ Backend is running (status: ${response.status})`);
+        
+        const statusDiv = document.getElementById('apiStatus');
+        statusDiv.textContent = '✅ Backend server is running on http://localhost:3000';
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'status success';
+      } catch (error) {
+        console.error("❌ Backend connection failed:", error.message);
+        
+        const statusDiv = document.getElementById('apiStatus');
+        statusDiv.textContent = `❌ Cannot connect to backend: ${error.message}. Make sure the server is running with "node server.js"`;
+        statusDiv.style.display = 'block';
+        statusDiv.className = 'status error';
+      }
+    }
+
+    // Auto-load airports on page load
+    window.addEventListener('load', () => {
+      console.log("Page loaded, auto-loading airports...");
+      testLoadAirports();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Test Programs</title>
+</head>
+<body>
+<h1>Programs Test</h1>
+<div id="programsGrid"></div>
+
+<script>
+const allPrograms = [
+  { id: 1, title: "Test Program 1", university: "Test University", location: "Toronto, Canada", country: "canada", type: "Bachelor's", field: "computer", icon: "💻", duration: "4 years", badge: "" },
+  { id: 2, title: "Test Program 2", university: "Test University 2", location: "London, UK", country: "uk", type: "Master's", field: "business", icon: "💼", duration: "2 years", badge: "" }
+];
+
+const grid = document.getElementById('programsGrid');
+grid.innerHTML = allPrograms.map(program => `
+  <div style="border: 1px solid #ccc; padding: 20px; margin: 10px;">
+    <h3>${program.title}</h3>
+    <p>${program.university}</p>
+    <p>${program.location}</p>
+  </div>
+`).join('');
+
+console.log('Programs loaded:', allPrograms.length);
+</script>
+</body>
+</html>

@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Portal - Caya Express</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+    import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, where, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0cIPzL1Pjf2zVuqxigspHGbnbL218ASw",
+      authDomain: "caya-express-admin.firebaseapp.com",
+      projectId: "caya-express-admin",
+      storageBucket: "caya-express-admin.firebasestorage.app",
+      messagingSenderId: "735192003762",
+      appId: "1:735192003762:web:6cfbfc191145ca892785ab"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    // Make Firebase available globally
+    window.firebaseAuth = auth;
+    window.firebaseDB = db;
+    window.firebaseStorage = storage;
+    window.firebaseModules = {
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged,
+      collection,
+      addDoc,
+      getDocs,
+      updateDoc,
+      deleteDoc,
+      doc,
+      query,
+      where,
+      orderBy,
+      serverTimestamp,
+      ref,
+      uploadBytes,
+      getDownloadURL
+    };
+
+    console.log('Firebase initialized for agent portal');
+  </script>
+  
+  <style>
+    :root {
+      --primary-gold: #D4AF37;
+      --dark-blue: #1a237e;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--gray-800);
+      background: var(--gray-50);
+    }
+
+    /* Login Page Styles */
+    .login-container {
+      min-height: calc(100vh - 100px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #283593 100%);
+      margin-top: 0;
+    }
+
+    .login-box {
+      background: white;
+      padding: 3rem;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .login-logo-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+      margin: 0 auto;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+      color: var(--gray-900);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .login-subtitle {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .form-group input {
+      padding: 0.875rem;
+      border: 2px solid var(--gray-300);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .remember-me input {
+      cursor: pointer;
+    }
+
+    .forgot-password {
+      color: var(--primary-gold);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      background: var(--primary-gold);
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    .login-btn:hover {
+      background: #C5A028;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .login-divider {
+      text-align: center;
+      margin: 1.5rem 0;
+      color: var(--gray-500);
+      position: relative;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: var(--gray-300);
+    }
+
+    .login-divider::before {
+      left: 0;
+    }
+
+    .login-divider::after {
+      right: 0;
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--gray-600);
+    }
+
+    .signup-link a {
+      color: var(--primary-gold);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Header Navigation Styles */
+    .header {
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--dark-blue);
+      font-weight: 700;
+      transition: opacity 0.3s;
+    }
+
+    .logo:hover {
+      opacity: 0.8;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-700);
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      gap: 0.375rem;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--dark-blue);
+      transition: all 0.3s;
+      border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        height: 100vh;
+        width: 250px;
+        background: white;
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Dashboard Styles */
+    .dashboard {
+      display: none;
+      min-height: 100vh;
+      background: var(--gray-50);
+    }
+
+    .dashboard.active {
+      display: block;
+    }
+
+    .dashboard-header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .dashboard-nav {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dashboard-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .dashboard-logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 2px solid var(--gray-300);
+      color: var(--gray-700);
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      border-color: var(--primary-gold);
+      color: var(--primary-gold);
+    }
+
+    .dashboard-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 2rem;
+    }
+
+    .dashboard-sidebar {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: fit-content;
+      position: sticky;
+      top: 80px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-menu {
+      list-style: none;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--gray-700);
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .sidebar-menu a:hover,
+    .sidebar-menu a.active {
+      background: var(--gray-100);
+      color: var(--primary-gold);
+    }
+
+    .dashboard-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .dashboard-welcome {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #283593 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+    }
+
+    .dashboard-welcome h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .dashboard-welcome p {
+      opacity: 0.95;
+      font-size: 1.05rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.75rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .stat-label {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    .section-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    .add-student-btn {
+      background: var(--primary-gold);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .add-student-btn:hover {
+      background: #C5A028;
+      transform: translateY(-2px);
+    }
+
+    .students-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .students-table th,
+    .students-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .students-table th {
+      background: var(--gray-50);
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .students-table tbody tr {
+      transition: background 0.2s;
+    }
+
+    .students-table tbody tr:hover {
+      background: var(--gray-50);
+    }
+
+    .status-badge {
+      padding: 0.375rem 0.875rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .status-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-reviewing {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .status-approved {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-rejected {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .action-btn {
+      background: transparent;
+      border: 1px solid var(--gray-300);
+      color: var(--gray-700);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .action-btn:hover {
+      border-color: var(--primary-gold);
+      color: var(--primary-gold);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--gray-500);
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .modal-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    .close-modal {
+      background: transparent;
+      border: none;
+      font-size: 2rem;
+      color: var(--gray-500);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .close-modal:hover {
+      color: var(--gray-900);
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .modal-form select {
+      padding: 0.875rem;
+      border: 2px solid var(--gray-300);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.3s;
+    }
+
+    .modal-form select:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+    }
+
+    .modal-form textarea {
+      padding: 0.875rem;
+      border: 2px solid var(--gray-300);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.3s;
+      resize: vertical;
+    }
+
+    .modal-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-gold);
+    }
+
+    .modal-form input[type="file"] {
+      padding: 0.5rem;
+      border: 2px dashed var(--gray-300);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .modal-form input[type="file"]:hover {
+      border-color: var(--primary-gold);
+      background: var(--gray-50);
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-container {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .students-table {
+        font-size: 0.875rem;
+      }
+
+      .students-table th,
+      .students-table td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 90px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+      </a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html" onclick="closeMenu()">Our Services</a></li>
+        <li><a href="study-abroad.html" onclick="closeMenu()">Study Abroad</a></li>
+        <li><a href="visa.html" onclick="closeMenu()">Visa Services</a></li>
+        <li><a href="tours.html" onclick="closeMenu()">Tour Packages</a></li>
+        <li><a href="travel.html" onclick="closeMenu()">Flight Booking</a></li>
+        <li><a href="agent-portal.html" onclick="closeMenu()">Agent Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Login Page -->
+  <div id="loginPage" class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <div class="login-logo">
+          <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 130px; width: auto; background: white; padding: 12px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin: 0 auto;">
+          <span style="font-weight: 700; margin-top: 0.75rem; font-size: 1.4rem;">CAYA EXPRESS TRAVEL</span>
+        </div>
+        <h2 class="login-title">Agent Portal</h2>
+        <p class="login-subtitle">Sign in to manage your students</p>
+      </div>
+      
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="your@email.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required placeholder="Enter your password">
+        </div>
+        
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" id="remember">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="login-btn">Sign In</button>
+      </form>
+      
+      <div class="login-divider">or</div>
+      
+      <div class="signup-link">
+        Don't have an account? <a href="partner.html#register">Register as Partner</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboardPage" class="dashboard">
+    <header class="dashboard-header">
+      <nav class="dashboard-nav">
+        <div class="dashboard-logo">
+          <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 75px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+        </div>
+        <div class="user-menu">
+          <div class="user-info">
+            <div class="user-avatar" id="userAvatar">A</div>
+            <span id="userName">Agent Name</span>
+          </div>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="dashboard-container">
+      <aside class="dashboard-sidebar">
+        <ul class="sidebar-menu">
+          <li><a href="#" class="active" onclick="showSection('overview')">📊 Overview</a></li>
+          <li><a href="#" onclick="showSection('students')">👥 My Students</a></li>
+          <li><a href="#" onclick="showSection('applications')">📝 Applications</a></li>
+          <li><a href="#" onclick="showSection('programs')">🎓 Programs</a></li>
+          <li><a href="#" onclick="showSection('documents')">📄 Documents</a></li>
+          <li><a href="#" onclick="showSection('commissions')">💰 Commissions</a></li>
+          <li><a href="#" onclick="showSection('support')">💬 Support</a></li>
+          <li><a href="#" onclick="showSection('settings')">⚙️ Settings</a></li>
+        </ul>
+      </aside>
+
+      <main class="dashboard-main">
+        <div class="dashboard-welcome">
+          <h1>Welcome back, <span id="welcomeName">Agent</span>! 👋</h1>
+          <p>Manage your students and track their application progress from one place.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-label">Total Students</div>
+            <div class="stat-value" id="totalStudents">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div class="stat-label">Active Applications</div>
+            <div class="stat-value" id="activeApplications">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-label">Approved</div>
+            <div class="stat-value" id="approvedApplications">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-label">Total Commission</div>
+            <div class="stat-value" id="totalCommission">$0</div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title">Recent Students</h2>
+            <button class="add-student-btn" onclick="openAddStudentModal()">
+              <span>+</span>
+              <span>Add Student</span>
+            </button>
+          </div>
+          
+          <div id="studentsTableContainer">
+            <table class="students-table" id="studentsTable">
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Email</th>
+                  <th>Program</th>
+                  <th>Destination</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="studentsTableBody">
+                <tr>
+                  <td colspan="6" class="empty-state">
+                    <div class="empty-state-icon">📋</div>
+                    <p>No students registered yet. Click "Add Student" to get started!</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add Student Modal -->
+  <div id="addStudentModal" class="modal">
+    <div class="modal-content" style="max-width: 900px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <h3 class="modal-title">Student Admission Application</h3>
+        <button class="close-modal" onclick="closeAddStudentModal()">&times;</button>
+      </div>
+      
+      <form id="addStudentForm" class="modal-form">
+        <!-- Personal Information Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">📋 Personal Information</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentFirstName">First Name *</label>
+              <input type="text" id="studentFirstName" required>
+            </div>
+            <div class="form-group">
+              <label for="studentMiddleName">Middle Name</label>
+              <input type="text" id="studentMiddleName">
+            </div>
+            <div class="form-group">
+              <label for="studentLastName">Last Name *</label>
+              <input type="text" id="studentLastName" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentDOB">Date of Birth *</label>
+              <input type="date" id="studentDOB" required>
+            </div>
+            <div class="form-group">
+              <label for="studentGender">Gender *</label>
+              <select id="studentGender" required>
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="studentNationality">Nationality *</label>
+              <input type="text" id="studentNationality" required placeholder="e.g., Nigerian">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentPassport">Passport Number *</label>
+              <input type="text" id="studentPassport" required>
+            </div>
+            <div class="form-group">
+              <label for="studentPassportExpiry">Passport Expiry Date *</label>
+              <input type="date" id="studentPassportExpiry" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">📞 Contact Information</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentEmail">Email Address *</label>
+              <input type="email" id="studentEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="studentPhone">Phone Number *</label>
+              <input type="tel" id="studentPhone" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="studentAddress">Current Address *</label>
+            <input type="text" id="studentAddress" required placeholder="Street address">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentCity">City *</label>
+              <input type="text" id="studentCity" required>
+            </div>
+            <div class="form-group">
+              <label for="studentState">State/Province *</label>
+              <input type="text" id="studentState" required>
+            </div>
+            <div class="form-group">
+              <label for="studentCountry">Country *</label>
+              <select id="studentCountry" required>
+                <option value="">Select country</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Ghana">Ghana</option>
+                <option value="Kenya">Kenya</option>
+                <option value="South Africa">South Africa</option>
+                <option value="India">India</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="studentPostalCode">Postal/Zip Code</label>
+            <input type="text" id="studentPostalCode">
+          </div>
+        </div>
+
+        <!-- Emergency Contact Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">🚨 Emergency Contact</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="emergencyName">Contact Name *</label>
+              <input type="text" id="emergencyName" required>
+            </div>
+            <div class="form-group">
+              <label for="emergencyRelationship">Relationship *</label>
+              <input type="text" id="emergencyRelationship" required placeholder="e.g., Parent, Spouse">
+            </div>
+            <div class="form-group">
+              <label for="emergencyPhone">Contact Phone *</label>
+              <input type="tel" id="emergencyPhone" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Background Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">🎓 Academic Background</h4>
+          
+          <div class="form-group">
+            <label for="highestEducation">Highest Level of Education *</label>
+            <select id="highestEducation" required onchange="toggleAcademicFields()">
+              <option value="">Select level</option>
+              <option value="High School">High School/Secondary</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Bachelor's">Bachelor's Degree</option>
+              <option value="Master's">Master's Degree</option>
+              <option value="PhD">PhD/Doctorate</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="lastSchool">Last School/University Attended *</label>
+              <input type="text" id="lastSchool" required>
+            </div>
+            <div class="form-group">
+              <label for="graduationYear">Year of Graduation *</label>
+              <input type="number" id="graduationYear" required min="1980" max="2030">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="gradeAverage">GPA/Grade Average *</label>
+              <input type="text" id="gradeAverage" required placeholder="e.g., 3.5/4.0 or 70%">
+            </div>
+            <div class="form-group">
+              <label for="fieldOfStudy">Field of Study *</label>
+              <input type="text" id="fieldOfStudy" required placeholder="e.g., Computer Science">
+            </div>
+          </div>
+
+          <!-- For Graduate Programs -->
+          <div id="undergraduateSection" style="display: none;">
+            <h5 style="margin-top: 1rem; margin-bottom: 0.5rem;">Undergraduate Details (for Master's/PhD applicants)</h5>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="undergradSchool">Undergraduate University</label>
+                <input type="text" id="undergradSchool">
+              </div>
+              <div class="form-group">
+                <label for="undergradDegree">Degree Obtained</label>
+                <input type="text" id="undergradDegree">
+              </div>
+              <div class="form-group">
+                <label for="undergradGPA">Undergraduate GPA</label>
+                <input type="text" id="undergradGPA">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- English Proficiency Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">🗣️ English Language Proficiency</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="englishTest">Test Type</label>
+              <select id="englishTest">
+                <option value="">Select test (if taken)</option>
+                <option value="IELTS">IELTS</option>
+                <option value="TOEFL">TOEFL</option>
+                <option value="PTE">PTE Academic</option>
+                <option value="Duolingo">Duolingo English Test</option>
+                <option value="None">Not taken yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="englishScore">Overall Score</label>
+              <input type="text" id="englishScore" placeholder="e.g., 7.0 or 90">
+            </div>
+            <div class="form-group">
+              <label for="englishDate">Test Date</label>
+              <input type="date" id="englishDate">
+            </div>
+          </div>
+        </div>
+
+        <!-- Program Selection Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">🎯 Program Selection</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="programType">Program Level *</label>
+              <select id="programType" required>
+                <option value="">Select program level</option>
+                <option value="Bachelor's">Bachelor's Degree (Undergraduate)</option>
+                <option value="Master's">Master's Degree (Postgraduate)</option>
+                <option value="PhD">PhD/Doctorate</option>
+                <option value="Certificate">Certificate Program</option>
+                <option value="Diploma">Diploma</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="destination">Destination Country *</label>
+              <select id="destination" required>
+                <option value="">Select destination</option>
+                <option value="Canada">Canada</option>
+                <option value="USA">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="Australia">Australia</option>
+                <option value="Germany">Germany</option>
+                <option value="Ireland">Ireland</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="intendedProgram">Intended Program/Major *</label>
+              <input type="text" id="intendedProgram" required placeholder="e.g., MBA, Computer Science">
+            </div>
+            <div class="form-group">
+              <label for="intakeYear">Intended Intake *</label>
+              <select id="intakeYear" required>
+                <option value="">Select intake</option>
+                <option value="Fall 2025">Fall 2025 (September)</option>
+                <option value="Winter 2026">Winter 2026 (January)</option>
+                <option value="Spring 2026">Spring 2026 (May)</option>
+                <option value="Fall 2026">Fall 2026 (September)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="preferredUniversities">Preferred Universities (comma-separated)</label>
+            <input type="text" id="preferredUniversities" placeholder="e.g., University of Toronto, McGill University">
+          </div>
+        </div>
+
+        <!-- Financial Information Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">💰 Financial Information</h4>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fundingSource">Primary Funding Source *</label>
+              <select id="fundingSource" required>
+                <option value="">Select funding source</option>
+                <option value="Self-Funded">Self-Funded</option>
+                <option value="Family-Sponsored">Family Sponsored</option>
+                <option value="Scholarship">Scholarship</option>
+                <option value="Government">Government Loan</option>
+                <option value="Employer">Employer Sponsored</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="financialSupport">Available Funds (USD) *</label>
+              <input type="number" id="financialSupport" required placeholder="Approximate amount">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="scholarshipInterest">Interested in Scholarships?</label>
+            <select id="scholarshipInterest">
+              <option value="Yes">Yes, please help me find scholarships</option>
+              <option value="No">No, I have sufficient funds</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Document Upload Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">📄 Required Documents</h4>
+          <p style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 1rem;">Upload all required documents (PDF format preferred, max 5MB each)</p>
+          
+          <div class="form-group">
+            <label for="docPassport">Passport (Bio-data page) *</label>
+            <input type="file" id="docPassport" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+
+          <div class="form-group">
+            <label for="docHighSchool">High School Transcript/Certificate *</label>
+            <input type="file" id="docHighSchool" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+
+          <div id="undergraduateDocsSection" style="display: none;">
+            <div class="form-group">
+              <label for="docBachelors">Bachelor's Degree Certificate</label>
+              <input type="file" id="docBachelors" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+
+            <div class="form-group">
+              <label for="docBachelorsTranscript">Bachelor's Transcript</label>
+              <input type="file" id="docBachelorsTranscript" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+          </div>
+
+          <div id="graduateDocsSection" style="display: none;">
+            <div class="form-group">
+              <label for="docMasters">Master's Degree Certificate</label>
+              <input type="file" id="docMasters" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+
+            <div class="form-group">
+              <label for="docMastersTranscript">Master's Transcript</label>
+              <input type="file" id="docMastersTranscript" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="docEnglish">English Test Results (IELTS/TOEFL/PTE)</label>
+            <input type="file" id="docEnglish" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+
+          <div class="form-group">
+            <label for="docCV">Curriculum Vitae (CV/Resume) *</label>
+            <input type="file" id="docCV" accept=".pdf,.doc,.docx" required>
+          </div>
+
+          <div class="form-group">
+            <label for="docSOP">Statement of Purpose *</label>
+            <input type="file" id="docSOP" accept=".pdf,.doc,.docx" required>
+          </div>
+
+          <div class="form-group">
+            <label for="docRecommendation">Letters of Recommendation (if available)</label>
+            <input type="file" id="docRecommendation" accept=".pdf,.doc,.docx" multiple>
+          </div>
+
+          <div class="form-group">
+            <label for="docFinancial">Proof of Financial Support *</label>
+            <input type="file" id="docFinancial" accept=".pdf,.jpg,.jpeg,.png" required>
+          </div>
+
+          <div class="form-group">
+            <label for="docOther">Other Supporting Documents</label>
+            <input type="file" id="docOther" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple>
+          </div>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+          <h4 style="color: var(--primary-gold); margin-bottom: 1rem;">ℹ️ Additional Information</h4>
+          
+          <div class="form-group">
+            <label for="workExperience">Work Experience (if any)</label>
+            <textarea id="workExperience" rows="3" placeholder="Job title, company, duration, responsibilities..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="extracurricular">Extracurricular Activities/Achievements</label>
+            <textarea id="extracurricular" rows="3" placeholder="Volunteer work, awards, leadership roles..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="specialNeeds">Special Needs/Accommodations</label>
+            <textarea id="specialNeeds" rows="2" placeholder="Any medical conditions, disabilities, or special requirements..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="studentNotes">Additional Notes</label>
+            <textarea id="studentNotes" rows="3" placeholder="Any other information you'd like to share..."></textarea>
+          </div>
+        </div>
+
+        <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #ffc107;">
+          <p style="margin: 0; font-size: 0.9rem;"><strong>📌 Important:</strong> Please ensure all information is accurate and all required documents are uploaded before submitting.</p>
+        </div>
+
+        <button type="submit" class="login-btn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Submit Application</button>
+      </form>
+    </div>
+  </div>
+
+  </script>
+
+  <!-- Mobile Menu Functions (shared) -->
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
+      if (!isClickInside && navMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+  </script>
+
+  <script>
+    let currentUser = JSON.parse(localStorage.getItem('cayaUser')) || null;
+    let students = [];
+
+    // Check if user is already logged in
+    if (currentUser) {
+      showDashboard(currentUser);
+    }
+
+    // Login form submission
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const loginBtn = e.target.querySelector('.login-btn');
+      
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Signing in...';
+      
+      try {
+        // Check if Firebase is initialized
+        if (!window.firebaseAuth || !window.firebaseModules) {
+          throw new Error('Firebase not initialized. Please refresh the page.');
+        }
+
+        const { signInWithEmailAndPassword } = window.firebaseModules;
+        const auth = window.firebaseAuth;
+        
+        // Sign in with Firebase Authentication
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const firebaseUser = userCredential.user;
+        
+        // Get partner data from Firestore
+        const { collection, query, where, getDocs } = window.firebaseModules;
+        const db = window.firebaseDB;
+        
+        const partnersRef = collection(db, 'partners');
+        const q = query(partnersRef, where('email', '==', email), where('status', '==', 'approved'));
+        const querySnapshot = await getDocs(q);
+        
+        if (querySnapshot.empty) {
+          throw new Error('Partner not found or not approved yet');
+        }
+        
+        const partnerDoc = querySnapshot.docs[0];
+        const partnerData = partnerDoc.data();
+        
+        const user = {
+          uid: firebaseUser.uid,
+          name: partnerData.name || `${partnerData.firstName} ${partnerData.lastName}`,
+          email: partnerData.email,
+          company: partnerData.company,
+          partnerId: partnerDoc.id
+        };
+        
+        localStorage.setItem('cayaUser', JSON.stringify(user));
+        showDashboard(user);
+        
+      } catch (error) {
+        console.error('Login error:', error);
+        
+        let errorMsg = 'Invalid credentials. ';
+        if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+          errorMsg += 'Please check your email and password.';
+        } else if (error.code === 'auth/too-many-requests') {
+          errorMsg += 'Too many failed attempts. Please try again later.';
+        } else if (error.message.includes('not approved')) {
+          errorMsg = 'Your partner account is pending approval. Please wait for admin approval.';
+        } else if (!navigator.onLine) {
+          errorMsg = 'No internet connection. Please check your network.';
+        } else {
+          errorMsg += 'Please contact support at cayaexpresstravels@gmail.com';
+        }
+        
+        alert(errorMsg);
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Sign In';
+      }
+    });
+
+    function showDashboard(user) {
+      currentUser = user;
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('dashboardPage').classList.add('active');
+      
+      // Set user info
+      document.getElementById('userName').textContent = user.name;
+      document.getElementById('welcomeName').textContent = user.name;
+      document.getElementById('userAvatar').textContent = user.name.charAt(0);
+      
+      // Load students
+      loadStudents();
+      updateStats();
+    }
+
+    function logout() {
+      if (window.firebaseAuth && window.firebaseModules) {
+        const { signOut } = window.firebaseModules;
+        signOut(window.firebaseAuth).catch(err => console.error('Logout error:', err));
+      }
+      
+      localStorage.removeItem('cayaUser');
+      currentUser = null;
+      document.getElementById('loginPage').style.display = 'flex';
+      document.getElementById('dashboardPage').classList.remove('active');
+      document.getElementById('loginForm').reset();
+    }
+
+    function openAddStudentModal() {
+      document.getElementById('addStudentModal').classList.add('active');
+    }
+
+    function closeAddStudentModal() {
+      document.getElementById('addStudentModal').classList.remove('active');
+      document.getElementById('addStudentForm').reset();
+      // Reset file upload sections visibility
+      document.getElementById('undergraduateSection').style.display = 'none';
+      document.getElementById('undergraduateDocsSection').style.display = 'none';
+      document.getElementById('graduateDocsSection').style.display = 'none';
+    }
+
+    // Toggle academic fields based on education level
+    function toggleAcademicFields() {
+      const highestEd = document.getElementById('highestEducation').value;
+      const undergradSection = document.getElementById('undergraduateSection');
+      const undergradDocs = document.getElementById('undergraduateDocsSection');
+      const graduateDocs = document.getElementById('graduateDocsSection');
+      
+      // Show undergraduate section for Master's and PhD
+      if (highestEd === "Master's" || highestEd === 'PhD') {
+        undergradSection.style.display = 'block';
+        undergradDocs.style.display = 'block';
+      } else {
+        undergradSection.style.display = 'none';
+        undergradDocs.style.display = 'none';
+      }
+      
+      // Show graduate docs for PhD
+      if (highestEd === 'PhD') {
+        graduateDocs.style.display = 'block';
+      } else {
+        graduateDocs.style.display = 'none';
+      }
+    }
+
+    // Add student form submission
+    document.getElementById('addStudentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Uploading Documents & Submitting...';
+      
+      try {
+        if (!window.firebaseDB || !window.firebaseModules || !window.firebaseStorage) {
+          throw new Error('Firebase not initialized');
+        }
+
+        const { collection, addDoc, serverTimestamp, ref, uploadBytes, getDownloadURL } = window.firebaseModules;
+        const db = window.firebaseDB;
+        const storage = window.firebaseStorage;
+        
+        submitBtn.textContent = 'Uploading documents... (1/2)';
+        
+        // Upload all documents to Firebase Storage
+        const uploadedDocs = {};
+        const fileInputs = [
+          { id: 'docPassport', name: 'passport' },
+          { id: 'docHighSchool', name: 'highSchoolTranscript' },
+          { id: 'docBachelors', name: 'bachelorsCertificate' },
+          { id: 'docBachelorsTranscript', name: 'bachelorsTranscript' },
+          { id: 'docMasters', name: 'mastersCertificate' },
+          { id: 'docMastersTranscript', name: 'mastersTranscript' },
+          { id: 'docEnglish', name: 'englishTestResults' },
+          { id: 'docCV', name: 'cv' },
+          { id: 'docSOP', name: 'statementOfPurpose' },
+          { id: 'docFinancial', name: 'financialProof' }
+        ];
+        
+        for (const input of fileInputs) {
+          const fileInput = document.getElementById(input.id);
+          if (fileInput && fileInput.files[0]) {
+            const file = fileInput.files[0];
+            const timestamp = Date.now();
+            const storageRef = ref(storage, `student-documents/${currentUser.partnerId}/${timestamp}_${file.name}`);
+            
+            try {
+              await uploadBytes(storageRef, file);
+              const downloadURL = await getDownloadURL(storageRef);
+              uploadedDocs[input.name] = {
+                fileName: file.name,
+                fileSize: file.size,
+                fileType: file.type,
+                url: downloadURL,
+                uploadedAt: new Date().toISOString()
+              };
+            } catch (uploadError) {
+              console.error(`Error uploading ${input.name}:`, uploadError);
+            }
+          }
+        }
+        
+        // Handle multiple recommendation letters
+        const recommendationInput = document.getElementById('docRecommendation');
+        if (recommendationInput && recommendationInput.files.length > 0) {
+          uploadedDocs.recommendations = [];
+          for (let i = 0; i < recommendationInput.files.length; i++) {
+            const file = recommendationInput.files[i];
+            const timestamp = Date.now();
+            const storageRef = ref(storage, `student-documents/${currentUser.partnerId}/${timestamp}_recommendation_${i}_${file.name}`);
+            
+            try {
+              await uploadBytes(storageRef, file);
+              const downloadURL = await getDownloadURL(storageRef);
+              uploadedDocs.recommendations.push({
+                fileName: file.name,
+                url: downloadURL,
+                uploadedAt: new Date().toISOString()
+              });
+            } catch (uploadError) {
+              console.error(`Error uploading recommendation ${i}:`, uploadError);
+            }
+          }
+        }
+        
+        // Handle other documents
+        const otherDocsInput = document.getElementById('docOther');
+        if (otherDocsInput && otherDocsInput.files.length > 0) {
+          uploadedDocs.otherDocuments = [];
+          for (let i = 0; i < otherDocsInput.files.length; i++) {
+            const file = otherDocsInput.files[i];
+            const timestamp = Date.now();
+            const storageRef = ref(storage, `student-documents/${currentUser.partnerId}/${timestamp}_other_${i}_${file.name}`);
+            
+            try {
+              await uploadBytes(storageRef, file);
+              const downloadURL = await getDownloadURL(storageRef);
+              uploadedDocs.otherDocuments.push({
+                fileName: file.name,
+                url: downloadURL,
+                uploadedAt: new Date().toISOString()
+              });
+            } catch (uploadError) {
+              console.error(`Error uploading other document ${i}:`, uploadError);
+            }
+          }
+        }
+        
+        submitBtn.textContent = 'Saving application... (2/2)';
+        
+        // Collect all form data
+        const newStudent = {
+          // Personal Information
+          firstName: document.getElementById('studentFirstName').value,
+          middleName: document.getElementById('studentMiddleName').value || '',
+          lastName: document.getElementById('studentLastName').value,
+          dateOfBirth: document.getElementById('studentDOB').value,
+          gender: document.getElementById('studentGender').value,
+          nationality: document.getElementById('studentNationality').value,
+          passportNumber: document.getElementById('studentPassport').value,
+          passportExpiry: document.getElementById('studentPassportExpiry').value,
+          
+          // Contact Information
+          email: document.getElementById('studentEmail').value,
+          phone: document.getElementById('studentPhone').value,
+          address: document.getElementById('studentAddress').value,
+          city: document.getElementById('studentCity').value,
+          state: document.getElementById('studentState').value,
+          country: document.getElementById('studentCountry').value,
+          postalCode: document.getElementById('studentPostalCode').value || '',
+          
+          // Emergency Contact
+          emergencyContact: {
+            name: document.getElementById('emergencyName').value,
+            relationship: document.getElementById('emergencyRelationship').value,
+            phone: document.getElementById('emergencyPhone').value
+          },
+          
+          // Academic Background
+          highestEducation: document.getElementById('highestEducation').value,
+          lastSchool: document.getElementById('lastSchool').value,
+          graduationYear: document.getElementById('graduationYear').value,
+          gradeAverage: document.getElementById('gradeAverage').value,
+          fieldOfStudy: document.getElementById('fieldOfStudy').value,
+          
+          // Undergraduate details (if applicable)
+          undergradSchool: document.getElementById('undergradSchool').value || '',
+          undergradDegree: document.getElementById('undergradDegree').value || '',
+          undergradGPA: document.getElementById('undergradGPA').value || '',
+          
+          // English Proficiency
+          englishTest: document.getElementById('englishTest').value || '',
+          englishScore: document.getElementById('englishScore').value || '',
+          englishTestDate: document.getElementById('englishDate').value || '',
+          
+          // Program Selection
+          programType: document.getElementById('programType').value,
+          destination: document.getElementById('destination').value,
+          intendedProgram: document.getElementById('intendedProgram').value,
+          intakeYear: document.getElementById('intakeYear').value,
+          preferredUniversities: document.getElementById('preferredUniversities').value || '',
+          
+          // Financial Information
+          fundingSource: document.getElementById('fundingSource').value,
+          availableFunds: document.getElementById('financialSupport').value,
+          scholarshipInterest: document.getElementById('scholarshipInterest').value || 'No',
+          
+          // Additional Information
+          workExperience: document.getElementById('workExperience').value || '',
+          extracurricular: document.getElementById('extracurricular').value || '',
+          specialNeeds: document.getElementById('specialNeeds').value || '',
+          notes: document.getElementById('studentNotes').value || '',
+          
+          // Documents
+          documents: uploadedDocs,
+          
+          // System fields
+          status: 'Pending Review',
+          dateAdded: new Date().toISOString(),
+          createdAt: serverTimestamp(),
+          partnerId: currentUser.partnerId,
+          partnerName: currentUser.name,
+          partnerEmail: currentUser.email,
+          partnerCompany: currentUser.company
+        };
+        
+        // Save to Firestore
+        const docRef = await addDoc(collection(db, 'students'), newStudent);
+        console.log('Student application submitted with ID:', docRef.id);
+        
+        // Send email notification to admin
+        sendApplicationEmail(newStudent, docRef.id);
+        
+        // Reload students
+        await loadStudents();
+        await updateStats();
+        closeAddStudentModal();
+        
+        alert('Application submitted successfully! We will review the application and contact the student within 3-5 business days.');
+        
+      } catch (error) {
+        console.error('Error submitting application:', error);
+        alert('Error submitting application: ' + error.message + '. Please try again or contact support.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+      }
+    });
+
+    function sendApplicationEmail(student, applicationId) {
+      const subject = encodeURIComponent(`New Student Application: ${student.firstName} ${student.lastName} - ${student.intendedProgram}`);
+      const body = encodeURIComponent(`NEW STUDENT APPLICATION SUBMITTED
+========================================
+
+APPLICATION ID: ${applicationId}
+
+PERSONAL INFORMATION:
+Name: ${student.firstName} ${student.middleName} ${student.lastName}
+Date of Birth: ${student.dateOfBirth}
+Gender: ${student.gender}
+Nationality: ${student.nationality}
+Passport: ${student.passportNumber} (Expires: ${student.passportExpiry})
+
+CONTACT INFORMATION:
+Email: ${student.email}
+Phone: ${student.phone}
+Address: ${student.address}, ${student.city}, ${student.state}, ${student.country} ${student.postalCode}
+
+EMERGENCY CONTACT:
+Name: ${student.emergencyContact.name}
+Relationship: ${student.emergencyContact.relationship}
+Phone: ${student.emergencyContact.phone}
+
+ACADEMIC BACKGROUND:
+Highest Education: ${student.highestEducation}
+Last School: ${student.lastSchool}
+Graduation Year: ${student.graduationYear}
+GPA/Grade: ${student.gradeAverage}
+Field of Study: ${student.fieldOfStudy}
+${student.undergradSchool ? '\nUndergraduate: ' + student.undergradSchool + ' (' + student.undergradGPA + ')' : ''}
+
+ENGLISH PROFICIENCY:
+Test: ${student.englishTest || 'Not taken'}
+Score: ${student.englishScore || 'N/A'}
+${student.englishTestDate ? 'Test Date: ' + student.englishTestDate : ''}
+
+PROGRAM SELECTION:
+Program Level: ${student.programType}
+Intended Program: ${student.intendedProgram}
+Destination: ${student.destination}
+Intake: ${student.intakeYear}
+Preferred Universities: ${student.preferredUniversities || 'None specified'}
+
+FINANCIAL INFORMATION:
+Funding Source: ${student.fundingSource}
+Available Funds: $${student.availableFunds}
+Scholarship Interest: ${student.scholarshipInterest}
+
+DOCUMENTS UPLOADED:
+${Object.keys(student.documents).length} document(s) uploaded
+View all documents in the admin portal.
+
+PARTNER INFORMATION:
+Partner: ${student.partnerName}
+Company: ${student.partnerCompany}
+Email: ${student.partnerEmail}
+
+Submitted: ${new Date().toLocaleString()}
+
+View full application in admin portal to review all documents and details.
+      `);
+
+      window.open(`mailto:cayaexpresstravels@gmail.com?subject=${subject}&body=${body}`, '_blank');
+    }
+      const body = encodeURIComponent(`
+NEW STUDENT REGISTRATION
+========================
+
+STUDENT INFORMATION:
+Name: ${student.firstName} ${student.lastName}
+Email: ${student.email}
+Phone: ${student.phone}
+Location: ${student.city}, ${student.country}
+
+PROGRAM DETAILS:
+Program Type: ${student.programType}
+Field of Study: ${student.fieldOfStudy}
+Destination: ${student.destination}
+
+ADDITIONAL NOTES:
+${student.notes || 'None'}
+
+AGENT INFORMATION:
+Agent: ${currentUser.name}
+Agent Email: ${currentUser.email}
+Company: ${currentUser.company}
+
+Registered: ${new Date(student.dateAdded).toLocaleString()}
+      `);
+
+      // Open mailto link
+      window.open(`mailto:cayaexpresstravels@gmail.com?subject=${subject}&body=${body}`, '_blank');
+    }
+
+    async function loadStudents() {
+      const tbody = document.getElementById('studentsTableBody');
+      
+      try {
+        if (!window.firebaseDB || !window.firebaseModules || !currentUser) {
+          throw new Error('Not initialized or not logged in');
+        }
+
+        const { collection, query, where, getDocs, orderBy } = window.firebaseModules;
+        const db = window.firebaseDB;
+        
+        // Query students for this partner
+        const studentsRef = collection(db, 'students');
+        const q = query(
+          studentsRef, 
+          where('partnerId', '==', currentUser.partnerId),
+          orderBy('createdAt', 'desc')
+        );
+        
+        const querySnapshot = await getDocs(q);
+        
+        students = [];
+        querySnapshot.forEach((doc) => {
+          students.push({ id: doc.id, ...doc.data() });
+        });
+        
+        if (students.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" class="empty-state">
+                <div class="empty-state-icon">📋</div>
+                <p>No students registered yet. Click "Add Student" to get started!</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+        
+        tbody.innerHTML = students.map(student => `
+          <tr>
+            <td>${student.firstName} ${student.lastName}</td>
+            <td>${student.email}</td>
+            <td>${student.programType} in ${student.fieldOfStudy}</td>
+            <td>${student.destination}</td>
+            <td><span class="status-badge status-${student.status.toLowerCase()}">${student.status}</span></td>
+            <td>
+              <button class="action-btn" onclick="viewStudent('${student.id}')">View Details</button>
+            </td>
+          </tr>
+        `).join('');
+        
+      } catch (error) {
+        console.error('Error loading students:', error);
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-state">
+              <div class="empty-state-icon">⚠️</div>
+              <p>Error loading students. Please refresh the page.</p>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('totalStudents').textContent = students.length;
+      document.getElementById('activeApplications').textContent = students.filter(s => s.status === 'Pending' || s.status === 'Reviewing').length;
+      document.getElementById('approvedApplications').textContent = students.filter(s => s.status === 'Approved').length;
+      document.getElementById('totalCommission').textContent = `$${students.filter(s => s.status === 'Approved').length * 500}`;
+    }
+
+    function viewStudent(id) {
+      const student = students.find(s => s.id === id);
+      if (student) {
+        alert(`Student Details:\n\nName: ${student.firstName} ${student.lastName}\nEmail: ${student.email}\nPhone: ${student.phone}\nProgram: ${student.programType} in ${student.fieldOfStudy}\nDestination: ${student.destination}\nStatus: ${student.status}\nAdded: ${new Date(student.dateAdded).toLocaleDateString()}`);
+      }
+    }
+
+    function showSection(section) {
+      // Update active menu item
+      document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // In production, load different sections
+      alert(`Loading ${section} section... (This is a demo)`);
+    }
+
+    // Close modal on outside click
+    document.getElementById('addStudentModal').addEventListener('click', (e) => {
+      if (e.target.id === 'addStudentModal') {
+        closeAddStudentModal();
+      }
+    });
+  </script>
+
+  <!-- Caya.ai compact Chatbot (injected) -->
+  <script src="caya-ai-fixed.js"></script>
+  <style>
+    .caya-chatbot-container{position:fixed;bottom:20px;right:20px;z-index:9999;font-family:Inter, sans-serif}
+    .caya-chat-button{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#c49b2c);border:3px solid #fff;box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer}
+    .caya-chatbox{position:fixed;bottom:100px;right:20px;width:340px;max-width:calc(100vw - 40px);height:480px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);display:none;flex-direction:column;overflow:hidden}
+    .caya-chatbox.active{display:flex}
+    .caya-chat-header{background:#1a237e;color:#fff;padding:12px;display:flex;align-items:center;justify-content:space-between}
+    .caya-chat-messages{flex:1;overflow:auto;padding:12px;background:#f9fafb}
+    .caya-input-area{padding:10px;border-top:1px solid #eee;display:flex;gap:8px}
+    .caya-input{flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:20px}
+    .caya-send{background:linear-gradient(135deg,#D4AF37,#c49b2c);border:none;color:#fff;border-radius:50%;width:44px;height:44px;cursor:pointer}
+    .caya-msg{margin-bottom:10px;display:flex;gap:8px}
+    .caya-msg.bot .bubble{background:#fff;color:#111;padding:8px 12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+    .caya-msg.user{justify-content:flex-end}
+    .caya-msg.user .bubble{background:#1a237e;color:#fff;padding:8px 12px;border-radius:12px}
+  </style>
+  <div class="caya-chatbot-container">
+    <button class="caya-chat-button" id="cayaToggleBtn" aria-label="Chat">🤖</button>
+    <div class="caya-chatbox" id="cayaChatbox">
+      <div class="caya-chat-header"><strong>Caya.ai</strong><button id="cayaClose" style="background:transparent;border:none;color:#fff;font-size:18px;cursor:pointer">×</button></div>
+      <div class="caya-chat-messages" id="cayaMessages"></div>
+      <div class="caya-input-area">
+        <input id="cayaInput" class="caya-input" placeholder="Ask me anything..." />
+        <button class="caya-send" id="cayaSend">➤</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      const toggle = document.getElementById('cayaToggleBtn');
+      const box = document.getElementById('cayaChatbox');
+      const closeBtn = document.getElementById('cayaClose');
+      const sendBtn = document.getElementById('cayaSend');
+      const input = document.getElementById('cayaInput');
+      const messages = document.getElementById('cayaMessages');
+
+      function appendMsg(text, who){
+        const d = document.createElement('div'); d.className = 'caya-msg ' + (who==='user'?'user':'bot');
+        const b = document.createElement('div'); b.className = 'bubble'; b.innerText = text;
+        d.appendChild(b); messages.appendChild(d); messages.scrollTop = messages.scrollHeight;
+      }
+
+      function getResponse(msg){
+        if(typeof cayaAI !== 'undefined' && typeof cayaAI.generateResponse === 'function'){
+          try{ const r = cayaAI.generateResponse(msg); return (r && r.response)? r.response : 'Sorry, I could not process that.'; }catch(e){return 'Sorry, something went wrong.'}
+        }
+        return 'Hi — Caya.ai is not loaded here. Please visit the homepage for full chat features.';
+      }
+
+      toggle.addEventListener('click', function(){ box.classList.toggle('active'); if(box.classList.contains('active') && messages.children.length===0){ setTimeout(()=>appendMsg(getResponse(''), 'bot'),400); } });
+      closeBtn.addEventListener('click', ()=>box.classList.remove('active'));
+      sendBtn.addEventListener('click', ()=>{ const v=input.value.trim(); if(!v) return; appendMsg(v,'user'); input.value=''; setTimeout(()=>appendMsg(getResponse(v),'bot'),300); });
+      input.addEventListener('keypress', function(e){ if(e.key==='Enter'){ sendBtn.click(); } });
+    })();
+  </script>
+
+</body>
+</html>

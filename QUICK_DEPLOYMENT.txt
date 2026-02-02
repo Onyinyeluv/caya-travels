@@ -1,0 +1,126 @@
+╔═══════════════════════════════════════════════════════════════╗
+║         CAYA EXPRESS TRAVELS - QUICK DEPLOYMENT GUIDE         ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📋 WHAT WAS FIXED:
+─────────────────────────────────────────────────────────────────
+✅ Frontend now uses environment-aware API configuration
+✅ Automatically detects localhost vs production
+✅ Backend CORS updated for production domains
+✅ Server binds to 0.0.0.0 for cloud hosting
+✅ All localhost:3000 hardcoded URLs replaced
+
+
+🚀 DEPLOYMENT CHECKLIST:
+─────────────────────────────────────────────────────────────────
+
+STEP 1: Deploy Backend
+┌─────────────────────────────────────────────────────────────┐
+│ Platform: Render.com (recommended) or Railway/Heroku        │
+│ Files: caya-duffel-backend folder                           │
+│ Environment Variables Required:                             │
+│   - DUFFEL_API_KEY=your_duffel_key                         │
+│   - EMAIL_USER=cayaexpresstravels@gmail.com               │
+│   - EMAIL_PASSWORD=your_email_password                     │
+│   - PORT=3000                                              │
+│                                                             │
+│ Result: You'll get a URL like:                             │
+│   https://caya-duffel-backend.onrender.com                 │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 2: Update Frontend
+┌─────────────────────────────────────────────────────────────┐
+│ File: frontend/travel.html (line ~950)                      │
+│                                                             │
+│ Find:                                                       │
+│   : 'https://your-backend-url.com';                        │
+│                                                             │
+│ Replace with your backend URL:                             │
+│   : 'https://caya-duffel-backend.onrender.com';           │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 3: Deploy Frontend
+┌─────────────────────────────────────────────────────────────┐
+│ Platform: Netlify (easiest) or Vercel/GitHub Pages         │
+│ Files: Upload entire frontend folder                        │
+│                                                             │
+│ Result: You'll get a URL like:                             │
+│   https://caya-travels.netlify.app                         │
+└─────────────────────────────────────────────────────────────┘
+
+STEP 4: Update Backend CORS
+┌─────────────────────────────────────────────────────────────┐
+│ File: caya-duffel-backend/server.js (line ~15)             │
+│                                                             │
+│ Add your frontend domain to allowedOrigins:                │
+│   'https://caya-travels.netlify.app',                      │
+│   'https://www.caya-travels.netlify.app'                   │
+│                                                             │
+│ Then redeploy backend                                       │
+└─────────────────────────────────────────────────────────────┘
+
+
+✅ VERIFICATION:
+─────────────────────────────────────────────────────────────────
+1. Visit your deployed website
+2. Open Browser Console (F12)
+3. Look for: "API Base URL: https://your-backend.com"
+4. Search for flights
+5. Verify prices show in Naira (₦)
+
+Expected console output:
+  API Base URL: https://caya-duffel-backend.onrender.com
+  Updated adults to 1 {adults: 1, children: 0, infants: 0}
+
+
+🔍 FILES CHANGED:
+─────────────────────────────────────────────────────────────────
+✓ frontend/travel.html
+  - Line ~950: Added API_BASE_URL configuration
+  - Line ~1194: Updated /search-flights endpoint
+  - Line ~1455: Updated /submit-reservation endpoint
+  - Line ~1370: Updated error message
+
+✓ caya-duffel-backend/server.js
+  - Line ~12: Updated CORS for production
+  - Line ~200: Server binds to 0.0.0.0
+
+
+🆘 TROUBLESHOOTING:
+─────────────────────────────────────────────────────────────────
+
+"Failed to fetch" error:
+→ Backend URL wrong in travel.html line 950
+→ Backend not deployed/running
+
+"CORS blocked" error:
+→ Add your domain to server.js allowedOrigins
+→ Redeploy backend
+
+Prices not in Naira:
+→ Check browser console for errors
+→ Verify API returns flight data
+
+
+📞 TESTING LOCALLY:
+─────────────────────────────────────────────────────────────────
+✅ STILL WORKS! The code automatically detects localhost
+→ Start backend: cd caya-duffel-backend; node server.js
+→ Open: http://127.0.0.1:5500/frontend/travel.html
+→ Everything works as before
+
+
+💡 WHY IT FAILED BEFORE:
+─────────────────────────────────────────────────────────────────
+localhost = "This computer only"
+  ✅ Your computer: Browser → localhost:3000 → Your server
+  ❌ Visitor's browser: Browser → localhost:3000 → Their computer (no server!)
+
+NOW WITH DEPLOYED BACKEND:
+  ✅ Any visitor: Browser → https://your-backend.com → Your server
+
+
+🎯 ESTIMATED TIME: 30 minutes
+💰 COST: FREE (using free tiers) or $7/month for always-on backend
+
+See DEPLOYMENT_GUIDE.md for detailed instructions!

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visa & Tours - Caya Express</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #D4AF37;
+      --dark-blue: #1a237e;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-800);
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #16a085 0%, #2ecc71 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-700);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .back-home {
+      background: var(--gray-100);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, rgba(22, 160, 133, 0.9) 0%, rgba(46, 204, 113, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=80') center/cover no-repeat;
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Quick Services */
+    .quick-services {
+      max-width: 1400px;
+      margin: -3rem auto 4rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .service-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    /* Content Section */
+    .content-section {
+      max-width: 1400px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray-600);
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Visa Services Grid */
+    .visa-services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .visa-service {
+      background: var(--gray-50);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px solid var(--gray-200);
+      transition: all 0.3s;
+    }
+
+    .visa-service:hover {
+      border-color: var(--primary-gold);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .visa-service h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--gray-900);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .visa-service ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .visa-service ul li {
+      padding: 0.5rem 0;
+      color: var(--gray-700);
+      display: flex;
+      align-items: start;
+      gap: 0.5rem;
+    }
+
+    .visa-service ul li:before {
+      content: "✓";
+      color: #2ecc71;
+      font-weight: bold;
+    }
+
+    /* Tour Packages */
+    .tour-packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .tour-package {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .tour-package:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .tour-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .tour-content {
+      padding: 1.5rem;
+    }
+
+    .tour-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--gray-900);
+    }
+
+    .tour-content p {
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .tour-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tour-feature {
+      background: var(--gray-100);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--gray-700);
+    }
+
+    .tour-cta {
+      display: block;
+      text-align: center;
+      background: var(--primary-gold);
+      color: white;
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .tour-cta:hover {
+      background: #c49b2c;
+    }
+
+    /* Destinations */
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .destination {
+      background: var(--gray-50);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 2px solid var(--gray-200);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .destination:hover {
+      border-color: #2ecc71;
+      transform: translateY(-3px);
+    }
+
+    .destination-icon {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .destination h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--gray-900);
+    }
+
+    .destination p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #283593 100%);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-radius: 16px;
+      margin: 4rem 2rem;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta-btn-primary {
+      background: var(--primary-gold);
+      color: white;
+    }
+
+    .cta-btn-primary:hover {
+      background: #c49b2c;
+      transform: translateY(-2px);
+    }
+
+    .cta-btn-secondary {
+      background: white;
+      color: var(--dark-blue);
+    }
+
+    .cta-btn-secondary:hover {
+      background: var(--gray-100);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gray-900);
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 5rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      color: var(--primary-gold);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .portal-links-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .portal-link-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--gray-800);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--gray-300);
+      transition: all 0.3s;
+    }
+
+    .portal-link-footer:hover {
+      background: var(--gray-700);
+      color: var(--primary-gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-700);
+      color: var(--gray-400);
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      color: white;
+      padding: 1rem;
+      border-radius: 50%;
+      font-size: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      text-decoration: none;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .tour-packages-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 90px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+      </a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html" onclick="closeMenu()">Our Services</a></li>
+        <li><a href="study-abroad.html" onclick="closeMenu()">Study Abroad</a></li>
+        <li><a href="visa.html" onclick="closeMenu()">Visa Services</a></li>
+        <li><a href="tours.html" onclick="closeMenu()">Tour Packages</a></li>
+        <li><a href="travel.html" onclick="closeMenu()">Flight Booking</a></li>
+        <li><a href="agent-portal.html" onclick="closeMenu()">Agent Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- (duplicate header removed) -->
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Your Gateway to the World</h1>
+    <p>Expert visa processing and unforgettable tour experiences. Let us handle the paperwork while you plan your adventure.</p>
+  </section>
+
+  <!-- Quick Services -->
+  <div class="quick-services">
+    <div class="service-card" onclick="document.getElementById('visa-services').scrollIntoView({behavior: 'smooth'})">
+      <div class="service-icon">🛂</div>
+      <h3>Visa Processing</h3>
+    </div>
+    <div class="service-card" onclick="document.getElementById('tour-packages').scrollIntoView({behavior: 'smooth'})">
+      <div class="service-icon">🏖️</div>
+      <h3>Tour Packages</h3>
+    </div>
+    <div class="service-card" onclick="window.location.href='travel.html'">
+      <div class="service-icon">✈️</div>
+      <h3>Flight Booking</h3>
+    </div>
+    <div class="service-card" onclick="window.open('https://wa.me/2349160003177', '_blank')">
+      <div class="service-icon">💬</div>
+      <h3>Consultation</h3>
+    </div>
+  </div>
+
+  <!-- Visa Services -->
+  <section class="content-section" id="visa-services">
+    <h2 class="section-title">Visa Processing Services</h2>
+    <p class="section-subtitle">We handle all types of visa applications with a 95% success rate</p>
+    
+    <div class="visa-services-grid">
+      <div class="visa-service">
+        <h3><span>🌴</span> Tourist Visa</h3>
+        <p>Explore the world with our comprehensive tourist visa services</p>
+        <ul>
+          <li>Vacation and holiday travel</li>
+          <li>Document preparation & review</li>
+          <li>Application submission</li>
+          <li>Interview preparation</li>
+          <li>Follow-up & tracking</li>
+        </ul>
+      </div>
+
+      <div class="visa-service">
+        <h3><span>💼</span> Business Visa</h3>
+        <p>Seamless business travel for conferences, meetings, and trade</p>
+        <ul>
+          <li>Business meetings & conferences</li>
+          <li>Trade shows & exhibitions</li>
+          <li>Corporate documentation</li>
+          <li>Express processing available</li>
+          <li>Multi-entry options</li>
+        </ul>
+      </div>
+
+      <div class="visa-service">
+        <h3><span>👨‍👩‍👧</span> Family Visit Visa</h3>
+        <p>Reunite with loved ones abroad with our family visa assistance</p>
+        <ul>
+          <li>Visit family & friends</li>
+          <li>Invitation letter assistance</li>
+          <li>Supporting documents guide</li>
+          <li>Relationship proof preparation</li>
+          <li>Sponsor documentation</li>
+        </ul>
+      </div>
+
+      <div class="visa-service">
+        <h3><span>🔄</span> Transit Visa</h3>
+        <p>Quick transit visa processing for connecting flights</p>
+        <ul>
+          <li>Airport transit permits</li>
+          <li>Short layover visas</li>
+          <li>Fast-track processing</li>
+          <li>Multiple country transit</li>
+          <li>24-hour support</li>
+        </ul>
+      </div>
+
+      <div class="visa-service">
+        <h3><span>🏥</span> Medical Visa</h3>
+        <p>Specialized visa services for medical treatment abroad</p>
+        <ul>
+          <li>Medical treatment travel</li>
+          <li>Hospital documentation</li>
+          <li>Medical records preparation</li>
+          <li>Attendant visa support</li>
+          <li>Insurance guidance</li>
+        </ul>
+      </div>
+
+      <div class="visa-service">
+        <h3><span>📋</span> Work Visa</h3>
+        <p>Professional work permit and visa assistance</p>
+        <ul>
+          <li>Employment-based visas</li>
+          <li>Work permit applications</li>
+          <li>Employer documentation</li>
+          <li>Contract verification</li>
+          <li>Extension services</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tour Packages -->
+  <section class="content-section" id="tour-packages">
+    <h2 class="section-title">Exclusive Tour Packages</h2>
+    <p class="section-subtitle">Carefully curated experiences for every type of traveler</p>
+    
+    <div class="tour-packages-grid">
+      <div class="tour-package">
+        <div class="tour-image" style="background: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80') center/cover; height: 200px; border-radius: 12px 12px 0 0;"></div>
+        <div class="tour-content">
+          <h3>Tropical Paradise Package</h3>
+          <p>Escape to breathtaking beaches and crystal-clear waters. Perfect for relaxation and adventure.</p>
+          <div class="tour-features">
+            <span class="tour-feature">7-14 Days</span>
+            <span class="tour-feature">All-Inclusive</span>
+            <span class="tour-feature">Beach Resort</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--gray-600);">
+            <strong>Includes:</strong> Accommodation, meals, airport transfers, beach activities, guided tours
+          </p>
+          <a href="https://wa.me/2349160003177?text=I'm interested in the Tropical Paradise Package" class="tour-cta" target="_blank">Book Now</a>
+        </div>
+      </div>
+
+      <div class="tour-package">
+        <div class="tour-image" style="background: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80') center/cover; height: 200px; border-radius: 12px 12px 0 0;"></div>
+        <div class="tour-content">
+          <h3>Cultural Heritage Tour</h3>
+          <p>Immerse yourself in rich history and vibrant cultures across Europe and Asia.</p>
+          <div class="tour-features">
+            <span class="tour-feature">10-15 Days</span>
+            <span class="tour-feature">Guided Tours</span>
+            <span class="tour-feature">Museums</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--gray-600);">
+            <strong>Includes:</strong> Expert guides, museum entries, cultural shows, accommodation, breakfast
+          </p>
+          <a href="https://wa.me/2349160003177?text=I'm interested in the Cultural Heritage Tour" class="tour-cta" target="_blank">Book Now</a>
+        </div>
+      </div>
+
+      <div class="tour-package">
+        <div class="tour-image" style="background: url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80') center/cover; height: 200px; border-radius: 12px 12px 0 0;"></div>
+        <div class="tour-content">
+          <h3>Adventure & Thrills</h3>
+          <p>For adrenaline junkies! Skiing, hiking, diving, and extreme sports adventures.</p>
+          <div class="tour-features">
+            <span class="tour-feature">5-12 Days</span>
+            <span class="tour-feature">Adventure Sports</span>
+            <span class="tour-feature">Expert Instructors</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--gray-600);">
+            <strong>Includes:</strong> Equipment rental, safety gear, training, accommodation, travel insurance
+          </p>
+          <a href="https://wa.me/2349160003177?text=I'm interested in the Adventure & Thrills Package" class="tour-cta" target="_blank">Book Now</a>
+        </div>
+      </div>
+
+      <div class="tour-package">
+        <div class="tour-image" style="background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80') center/cover; height: 200px; border-radius: 12px 12px 0 0;"></div>
+        <div class="tour-content">
+          <h3>Romantic Getaway</h3>
+          <p>Perfect honeymoon and couple's retreat with luxury and privacy.</p>
+          <div class="tour-features">
+            <span class="tour-feature">5-10 Days</span>
+            <span class="tour-feature">Luxury Resorts</span>
+            <span class="tour-feature">Private Tours</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--gray-600);">
+            <strong>Includes:</strong> Luxury accommodation, candlelit dinners, spa treatments, private excursions
+          </p>
+          <a href="https://wa.me/2349160003177?text=I'm interested in the Romantic Getaway Package" class="tour-cta" target="_blank">Book Now</a>
+        </div>
+      </div>
+
+      <div class="tour-package">
+        <div class="tour-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">👨‍👩‍👧‍👦</div>
+        <div class="tour-content">
+          <h3>Family Fun Package</h3>
+          <p>Kid-friendly destinations with activities for the whole family.</p>
+          <div class="tour-features">
+            <span class="tour-feature">7-12 Days</span>
+            <span class="tour-feature">Family-Friendly</span>
+            <span class="tour-feature">Theme Parks</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--gray-600);">
+            <strong>Includes:</strong> Family suites, kids activities, theme park tickets, baby-sitting services
+          </p>
+          <a href="https://wa.me/2349160003177?text=I'm interested in the Family Fun Package" class="tour-cta" target="_blank">Book Now</a>
+        </div>
+      </div>
+
+      <div class="tour-package">
+        <div class="tour-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">🕌</div>
+        <div class="tour-content">
+          <h3>Religious Pilgrimage</h3>
+          <p>Spiritual journeys to holy sites with guided religious tours.</p>
+          <div class="tour-features">
+            <span class="tour-feature">7-21 Days</span>
+            <span class="tour-feature">Holy Sites</span>
+            <span class="tour-feature">Religious Guides</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--gray-600);">
+            <strong>Includes:</strong> Religious site visits, spiritual guides, group prayers, halal/kosher meals
+          </p>
+          <a href="https://wa.me/2349160003177?text=I'm interested in the Religious Pilgrimage Package" class="tour-cta" target="_blank">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Destinations -->
+  <section class="content-section" id="destinations">
+    <h2 class="section-title">Popular Destinations</h2>
+    <p class="section-subtitle">Explore the world's most sought-after travel destinations</p>
+    
+    <div class="destinations-grid">
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit Dubai', '_blank')">
+        <div class="destination-icon">🏙️</div>
+        <h3>Dubai, UAE</h3>
+        <p>Luxury, innovation, and desert adventures</p>
+      </div>
+
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit London', '_blank')">
+        <div class="destination-icon">🏰</div>
+        <h3>London, UK</h3>
+        <p>History, culture, and royal experiences</p>
+      </div>
+
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit Paris', '_blank')">
+        <div class="destination-icon">🗼</div>
+        <h3>Paris, France</h3>
+        <p>Romance, art, and culinary delights</p>
+      </div>
+
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit Maldives', '_blank')">
+        <div class="destination-icon">🏖️</div>
+        <h3>Maldives</h3>
+        <p>Pristine beaches and luxury resorts</p>
+      </div>
+
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit New York', '_blank')">
+        <div class="destination-icon">🗽</div>
+        <h3>New York, USA</h3>
+        <p>The city that never sleeps</p>
+      </div>
+
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit Bali', '_blank')">
+        <div class="destination-icon">🌺</div>
+        <h3>Bali, Indonesia</h3>
+        <p>Tropical paradise and spiritual retreats</p>
+      </div>
+
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit Istanbul', '_blank')">
+        <div class="destination-icon">🕌</div>
+        <h3>Istanbul, Turkey</h3>
+        <p>Where East meets West</p>
+      </div>
+
+      <div class="destination" onclick="window.open('https://wa.me/2349160003177?text=I want to visit Tokyo', '_blank')">
+        <div class="destination-icon">🗾</div>
+        <h3>Tokyo, Japan</h3>
+        <p>Tradition meets technology</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Ready for Your Next Adventure?</h2>
+    <p>Let our visa and travel experts make your dream trip a reality</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/2349160003177?text=I need help with visa processing and tour packages" class="cta-btn cta-btn-primary" target="_blank">
+        <span>💬</span> Chat on WhatsApp
+      </a>
+      <a href="mailto:cayaexpresstravels@gmail.com?subject=Visa and Tour Inquiry" class="cta-btn cta-btn-secondary">
+        <span>📧</span> Email Us
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Visa & Tours Portal</h4>
+        <ul class="footer-links">
+          <li><a href="#visa-services">Visa Services</a></li>
+          <li><a href="#tour-packages">Tour Packages</a></li>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="travel.html">Flight Booking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Popular Visa Types</h4>
+        <ul class="footer-links">
+          <li><a href="#visa-services">Tourist Visa</a></li>
+          <li><a href="#visa-services">Business Visa</a></li>
+          <li><a href="#visa-services">Family Visit</a></li>
+          <li><a href="#visa-services">Work Visa</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Our Other Services</h4>
+        <div class="portal-links-footer">
+          <a href="study-abroad.html" class="portal-link-footer">
+            <span>🎓</span>
+            <span>Study Abroad Portal</span>
+          </a>
+          <a href="travel.html" class="portal-link-footer">
+            <span>✈️</span>
+            <span>Flight Ticketing</span>
+          </a>
+          <a href="/" class="portal-link-footer">
+            <span>🏠</span>
+            <span>Back to Main Portal</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul class="footer-links">
+          <li>📧 cayaexpresstravels@gmail.com</li>
+          <li>📞 +234 810 154 9916</li>
+          <li>📞 +234 916 000 3177</li>
+          <li><a href="https://wa.me/2349160003177" target="_blank">💬 WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Caya Express - Visa & Tours Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/2349160003177" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+    💬
+  </a>
+
+  <!-- (legacy chatbot loader removed) -->
+
+  <!-- Mobile Menu Functions (shared) -->
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if(!navMenu || !hamburger) return;
+      const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
+      if (!isClickInside && navMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+  </script>
+
+</body>
+</html>

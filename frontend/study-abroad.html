@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Abroad - Caya Express</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #D4AF37;
+      --dark-blue: #1a237e;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-800);
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-700);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-gold);
+      margin: 3px 0;
+      transition: all 0.3s;
+      border-radius: 3px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .back-home {
+      background: var(--gray-100);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, rgba(26, 35, 126, 0.9) 0%, rgba(40, 53, 147, 0.9) 100%),
+                  url('images/studyprograms .jpg') center/cover no-repeat;
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Quick Links */
+    .quick-links {
+      max-width: 1400px;
+      margin: -3rem auto 4rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .quick-link {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--gray-800);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .quick-link-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .quick-link h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Content Section */
+    .content-section {
+      max-width: 1400px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray-600);
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer {
+      background: var(--gray-900);
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 5rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      color: var(--primary-gold);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .portal-links-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .portal-link-footer {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--gray-800);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--gray-300);
+      transition: all 0.3s;
+    }
+
+    .portal-link-footer:hover {
+      background: var(--gray-700);
+      color: var(--primary-gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-700);
+      color: var(--gray-400);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 6rem 2rem 2rem;
+        gap: 1rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 100;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: left;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .logo span {
+        font-size: 1rem !important;
+      }
+
+      .logo img {
+        height: 60px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 90px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+      </a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+        <li><a href="study-abroad.html" onclick="closeMenu()">Study Abroad</a></li>
+        <li><a href="visa.html" onclick="closeMenu()">Visa Services</a></li>
+        <li><a href="tours.html" onclick="closeMenu()">Tour Packages</a></li>
+        <li><a href="travel.html" onclick="closeMenu()">Flight Booking</a></li>
+        <li><a href="/" class="back-home" onclick="closeMenu()">← Back to Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Study Abroad with Confidence</h1>
+    <p>Get admitted to top universities in Canada, USA, UK, Australia, and more. We guide you every step of the way.</p>
+  </section>
+
+  <!-- Quick Links -->
+  <div class="quick-links">
+    <a href="programs.html" class="quick-link">
+      <h3>Browse Programs</h3>
+    </a>
+    <a href="programs.html" class="quick-link">
+      <h3>Universities</h3>
+    </a>
+    <a href="partner.html#register" class="quick-link">
+      <h3>Apply Now</h3>
+    </a>
+    <a href="https://wa.me/2349160003177" class="quick-link" target="_blank">
+      <h3>Get Counseling</h3>
+    </a>
+  </div>
+
+  <!-- Programs Section -->
+  <section class="content-section">
+    <h2 class="section-title">Explore 150,000+ Study Programs</h2>
+    <p class="section-subtitle">Find the perfect program that matches your academic goals and career aspirations</p>
+    <div style="text-align: center; margin: 2rem 0;">
+      <a href="programs.html" style="display: inline-block; padding: 1.25rem 3rem; background: var(--primary-gold); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 1.1rem;">
+        View All Programs →
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Study Abroad Portal</h4>
+        <ul class="footer-links">
+          <li><a href="programs.html">All Programs</a></li>
+          <li><a href="programs.html">Universities</a></li>
+          <li><a href="partner.html">Partner With Us</a></li>
+          <li><a href="agent-portal.html">Agent Portal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Popular Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="programs.html">Study in Canada</a></li>
+          <li><a href="programs.html">Study in USA</a></li>
+          <li><a href="programs.html">Study in UK</a></li>
+          <li><a href="programs.html">Study in Australia</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Our Other Services</h4>
+        <div class="portal-links-footer">
+          <a href="visa.html" class="portal-link-footer">
+            <span>Visa Processing Portal</span>
+          </a>
+          <a href="tours.html" class="portal-link-footer">
+            <span>Tour Packages Portal</span>
+          </a>
+          <a href="travel.html" class="portal-link-footer">
+            <span>Flight Ticketing</span>
+          </a>
+          <a href="/" class="portal-link-footer">
+            <span>Back to Main Portal</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul class="footer-links">
+          <li><strong>Email:</strong></li>
+          <li>cayaexpresstravels@gmail.com</li>
+          <li>info@cayaexpresstravel.com</li>
+          <li style="margin-top: 0.5rem;"><strong>Phone:</strong></li>
+          <li>+234 810 154 9916</li>
+          <li>+234 916 000 3177</li>
+          <li>+234 706 543 3796</li>
+          <li style="margin-top: 0.5rem;"><strong>Address:</strong></li>
+          <li>Road 1, B70, Ikota Shopping Complex,</li>
+          <li>Road 1, B70, Ikota Shopping Complex, V.G.C Ajah Lagos, Nigeria</li>
+          <li style="margin-top: 0.5rem;"><a href="https://wa.me/2348101549916" target="_blank" style="color: #25D366;">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Caya Express - Study Abroad Portal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Caya.ai Chatbot -->
+    <!-- Mobile Menu Functions -->
+    <script>
+      function toggleMenu() {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger');
+        if(!navMenu || !hamburger) return;
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+      }
+
+      function closeMenu() {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger');
+        if(!navMenu || !hamburger) return;
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      }
+
+      document.addEventListener('click', function(event) {
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.querySelector('.hamburger');
+        if(!navMenu || !hamburger) return;
+        const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
+        if (!isClickInside && navMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    </script>
+
+  <!-- Caya.ai compact Chatbot (injected) -->
+  <script src="caya-ai-fixed.js"></script>
+  <style>
+    .caya-chatbot-container{position:fixed;bottom:20px;right:20px;z-index:9999;font-family:Inter, sans-serif}
+    .caya-chat-button{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#c49b2c);border:3px solid #fff;box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer}
+    .caya-chatbox{position:fixed;bottom:100px;right:20px;width:340px;max-width:calc(100vw - 40px);height:480px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);display:none;flex-direction:column;overflow:hidden}
+    .caya-chatbox.active{display:flex}
+    .caya-chat-header{background:#1a237e;color:#fff;padding:12px;display:flex;align-items:center;justify-content:space-between}
+    .caya-chat-messages{flex:1;overflow:auto;padding:12px;background:#f9fafb}
+    .caya-input-area{padding:10px;border-top:1px solid #eee;display:flex;gap:8px}
+    .caya-input{flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:20px}
+    .caya-send{background:linear-gradient(135deg,#D4AF37,#c49b2c);border:none;color:#fff;border-radius:50%;width:44px;height:44px;cursor:pointer}
+    .caya-msg{margin-bottom:10px;display:flex;gap:8px}
+    .caya-msg.bot .bubble{background:#fff;color:#111;padding:8px 12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+    .caya-msg.user{justify-content:flex-end}
+    .caya-msg.user .bubble{background:#1a237e;color:#fff;padding:8px 12px;border-radius:12px}
+  </style>
+  <div class="caya-chatbot-container">
+    <button class="caya-chat-button" id="cayaToggleBtn" aria-label="Chat">🤖</button>
+    <div class="caya-chatbox" id="cayaChatbox">
+      <div class="caya-chat-header"><strong>Caya.ai</strong><button id="cayaClose" style="background:transparent;border:none;color:#fff;font-size:18px;cursor:pointer">×</button></div>
+      <div class="caya-chat-messages" id="cayaMessages"></div>
+      <div class="caya-input-area">
+        <input id="cayaInput" class="caya-input" placeholder="Ask me anything..." />
+        <button class="caya-send" id="cayaSend">➤</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      const toggle = document.getElementById('cayaToggleBtn');
+      const box = document.getElementById('cayaChatbox');
+      const closeBtn = document.getElementById('cayaClose');
+      const sendBtn = document.getElementById('cayaSend');
+      const input = document.getElementById('cayaInput');
+      const messages = document.getElementById('cayaMessages');
+
+      function appendMsg(text, who){
+        const d = document.createElement('div'); d.className = 'caya-msg ' + (who==='user'?'user':'bot');
+        const b = document.createElement('div'); b.className = 'bubble'; b.innerText = text;
+        d.appendChild(b); messages.appendChild(d); messages.scrollTop = messages.scrollHeight;
+      }
+
+      function getResponse(msg){
+        if(typeof cayaAI !== 'undefined' && typeof cayaAI.generateResponse === 'function'){
+          try{ const r = cayaAI.generateResponse(msg); return (r && r.response)? r.response : 'Sorry, I could not process that.'; }catch(e){return 'Sorry, something went wrong.'}
+        }
+        return 'Hi — Caya.ai is not loaded here. Please visit the homepage for full chat features.';
+      }
+
+      toggle.addEventListener('click', function(){ box.classList.toggle('active'); if(box.classList.contains('active') && messages.children.length===0){ setTimeout(()=>appendMsg(getResponse(''), 'bot'),400); } });
+      closeBtn.addEventListener('click', ()=>box.classList.remove('active'));
+      sendBtn.addEventListener('click', ()=>{ const v=input.value.trim(); if(!v) return; appendMsg(v,'user'); input.value=''; setTimeout(()=>appendMsg(getResponse(v),'bot'),300); });
+      input.addEventListener('keypress', function(e){ if(e.key==='Enter'){ sendBtn.click(); } });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Render.com Deployment Files
+
+node_modules/
+.env
+*.log
+.DS_Store

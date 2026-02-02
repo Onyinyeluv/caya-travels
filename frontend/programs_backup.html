@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore 150+ education programs from top universities worldwide. Find your perfect program by location, field of study, and budget." />
+    <title>Education Programs | Caya Express Travels</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      :root {
+        --primary-gold: #D4AF37;
+        --dark: #0F172A;
+        --gray-50: #F9FAFB;
+        --gray-100: #F3F4F6;
+        --gray-200: #E5E7EB;
+        --gray-300: #D1D5DB;
+        --gray-400: #9CA3AF;
+        --gray-600: #4B5563;
+        --gray-700: #374151;
+        --gray-900: #111827;
+      }
+      
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background: white;
+      }
+      
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        z-index: 1000;
+      }
+      
+      .nav-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary-gold);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+      }
+      
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        list-style: none;
+      }
+      
+      .nav-links a {
+        text-decoration: none;
+        color: var(--gray-700);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--primary-gold);
+      }
+      
+      .btn-primary {
+        background: var(--primary-gold);
+        color: var(--dark);
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+      }
+      
+      /* Hero Section */
+      .hero {
+        margin-top: 80px;
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        color: white;
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+      }
+      
+      .hero-highlight {
+        color: var(--primary-gold);
+      }
+      
+      .hero p {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      /* Search Section */
+      .search-section {
+        background: white;
+        padding: 2rem;
+        margin: -3rem auto 3rem;
+        max-width: 900px;
+        border-radius: 1rem;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        position: relative;
+      }
+      
+      .search-box {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .search-input {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid var(--gray-200);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-family: 'Inter', sans-serif;
+      }
+      
+      .search-input:focus {
+        outline: none;
+        border-color: var(--primary-gold);
+      }
+      
+      .quick-filters {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      
+      .filter-tag {
+        padding: 0.5rem 1rem;
+        background: var(--gray-100);
+        border: none;
+        border-radius: 2rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      
+      .filter-tag:hover,
+      .filter-tag.active {
+        background: var(--primary-gold);
+        color: var(--dark);
+      }
+      
+      /* Main Content */
+      .main-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 2rem;
+      }
+      
+      /* Sidebar Filters */
+      .sidebar {
+        background: var(--gray-50);
+        padding: 1.5rem;
+        border-radius: 1rem;
+        height: fit-content;
+        position: sticky;
+        top: 100px;
+      }
+      
+      .filter-section {
+        margin-bottom: 2rem;
+      }
+      
+      .filter-section:last-child {
+        margin-bottom: 0;
+      }
+      
+      .filter-title {
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+      }
+      
+      .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+      }
+      
+      .filter-option input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+      
+      .filter-option label {
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--gray-700);
+      }
+      
+      .filter-input {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid var(--gray-300);
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+      }
+      
+      .clear-filters {
+        width: 100%;
+        padding: 0.75rem;
+        background: white;
+        border: 1px solid var(--gray-300);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: 500;
+        margin-top: 1rem;
+        transition: all 0.2s;
+      }
+      
+      .clear-filters:hover {
+        background: var(--gray-100);
+      }
+      
+      /* Programs Grid */
+      .programs-container {
+        min-height: 500px;
+      }
+      
+      .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      
+      .results-count {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--dark);
+      }
+      
+      .sort-select {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--gray-300);
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      
+      .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+      
+      .program-card {
+        background: white;
+        border: 1px solid var(--gray-200);
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+      }
+      
+      .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      }
+      
+      .program-image {
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(135deg, var(--primary-gold) 0%, #C19B2E 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        position: relative;
+      }
+      
+      .program-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: white;
+        color: var(--dark);
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      
+      .program-content {
+        padding: 1.5rem;
+      }
+      
+      .program-meta {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        flex-wrap: wrap;
+      }
+      
+      .meta-tag {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        color: var(--gray-600);
+      }
+      
+      .program-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+        line-height: 1.4;
+      }
+      
+      .program-university {
+        color: var(--gray-600);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+      
+      .program-details {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--gray-200);
+        gap: 1.5rem;
+      }
+      
+      .program-duration {
+        color: var(--gray-700);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      
+      .program-level {
+        color: var(--gray-600);
+        font-size: 0.875rem;
+      }
+      
+      /* Popular Searches */
+      .popular-searches {
+        background: var(--gray-50);
+        padding: 4rem 2rem;
+      }
+      
+      .section-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        color: var(--dark);
+      }
+      
+      .popular-grid {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+      
+      .popular-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        text-align: center;
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 600;
+        transition: all 0.2s;
+        border: 2px solid transparent;
+      }
+      
+      .popular-item:hover {
+        border-color: var(--primary-gold);
+        transform: translateY(-3px);
+      }
+      
+      .popular-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      /* Countries Section */
+      .countries-section {
+        padding: 4rem 2rem;
+        background: white;
+      }
+      
+      .countries-grid {
+        max-width: 1280px;
+        margin: 2rem auto 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+      
+      .country-card {
+        background: var(--gray-50);
+        padding: 2rem;
+        border-radius: 1rem;
+        text-align: center;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      
+      .country-card:hover {
+        background: var(--primary-gold);
+        transform: scale(1.05);
+      }
+      
+      .country-flag {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      
+      .country-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      
+      .country-programs {
+        color: var(--gray-600);
+        font-size: 0.9rem;
+      }
+      
+      .country-card:hover .country-programs {
+        color: var(--dark);
+      }
+      
+      /* Steps Section */
+      .steps-section {
+        background: linear-gradient(135deg, var(--dark) 0%, #1E293B 100%);
+        padding: 4rem 2rem;
+        color: white;
+      }
+      
+      .steps-grid {
+        max-width: 1280px;
+        margin: 2rem auto 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+      
+      .step-card {
+        background: rgba(255,255,255,0.1);
+        padding: 2rem;
+        border-radius: 1rem;
+        backdrop-filter: blur(10px);
+      }
+      
+      .step-number {
+        width: 50px;
+        height: 50px;
+        background: var(--primary-gold);
+        color: var(--dark);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+      }
+      
+      .step-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+      }
+      
+      .step-card p {
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+      
+      /* Footer */
+      footer {
+        background: #000;
+        color: rgba(255,255,255,0.8);
+        padding: 4rem 2rem 2rem;
+      }
+      
+      .footer-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+      
+      .footer-section h4 {
+        color: var(--primary-gold);
+        font-size: 1.125rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+      
+      .footer-section ul {
+        list-style: none;
+      }
+      
+      .footer-section ul li {
+        margin-bottom: 0.75rem;
+      }
+      
+      .footer-section a {
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      
+      .footer-section a:hover {
+        color: var(--primary-gold);
+      }
+      
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        color: rgba(255,255,255,0.5);
+      }
+      
+      @media (max-width: 968px) {
+        .main-content {
+          grid-template-columns: 1fr;
+        }
+        
+        .sidebar {
+          position: static;
+        }
+        
+        .hero h1 {
+          font-size: 2rem;
+        }
+        
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <a href="main.html" class="logo">
+          <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 90px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="programs.html" class="active">Programs</a></li>
+          <li><a href="partner.html">Partner</a></li>
+          <li><a href="agent-portal.html">Agent Portal</a></li>
+          <li><a href="travel.html">Travel</a></li>
+          <li><a href="main.html">Home</a></li>
+          <li><a href="agent-portal.html" class="btn-primary">Sign In</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Find Your <span class="hero-highlight">Perfect Program</span></h1>
+      <p>Explore 150+ education programs from top universities across 6 countries. Your future starts here.</p>
+    </section>
+
+    <!-- Search Section -->
+    <div class="search-section">
+      <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search by program name, university, or field of study..." />
+        <button class="btn-primary">Search</button>
+      </div>
+      <div class="quick-filters">
+        <button class="filter-tag active">All Programs</button>
+        <button class="filter-tag">Bachelor's</button>
+        <button class="filter-tag">Master's</button>
+        <button class="filter-tag">PhD</button>
+        <button class="filter-tag">Certificate</button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Sidebar Filters -->
+      <aside class="sidebar">
+        <div class="filter-section">
+          <h3 class="filter-title">Country</h3>
+          <div class="filter-option">
+            <input type="checkbox" id="canada" />
+            <label for="canada">🇨🇦 Canada (45)</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="usa" />
+            <label for="usa">🇺🇸 United States (38)</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="uk" />
+            <label for="uk">🇬🇧 United Kingdom (32)</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="australia" />
+            <label for="australia">🇦🇺 Australia (18)</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="germany" />
+            <label for="germany">🇩🇪 Germany (12)</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="ireland" />
+            <label for="ireland">🇮🇪 Ireland (8)</label>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <h3 class="filter-title">Field of Study</h3>
+          <div class="filter-option">
+            <input type="checkbox" id="business" />
+            <label for="business">Business & Management</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="engineering" />
+            <label for="engineering">Engineering</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="computer" />
+            <label for="computer">Computer Science</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="health" />
+            <label for="health">Health Sciences</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="arts" />
+            <label for="arts">Arts & Humanities</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="science" />
+            <label for="science">Natural Sciences</label>
+          </div>
+        </div>
+
+        <div class="filter-section">
+          <h3 class="filter-title">Duration</h3>
+          <div class="filter-option">
+            <input type="checkbox" id="short" />
+            <label for="short">< 1 year</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="medium" />
+            <label for="medium">1-2 years</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="long" />
+            <label for="long">3-4 years</label>
+          </div>
+          <div class="filter-option">
+            <input type="checkbox" id="extended" />
+            <label for="extended">4+ years</label>
+          </div>
+        </div>
+
+        <button class="clear-filters">Clear All Filters</button>
+      </aside>
+
+      <!-- Programs Grid -->
+      <div class="programs-container">
+        <div class="results-header">
+          <div class="results-count">153 Programs Found</div>
+          <select class="sort-select">
+            <option>Sort by: Relevance</option>
+            <option>Duration: Shortest First</option>
+            <option>Newest Programs</option>
+          </select>
+        </div>
+
+        <div class="programs-grid" id="programsGrid">
+          <!-- Programs will be dynamically loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Popular Searches -->
+    <section class="popular-searches">
+      <h2 class="section-title">Popular Fields of Study</h2>
+      <div class="popular-grid">
+        <div class="popular-item" data-field="business">
+          <div class="popular-icon">💼</div>
+          Business
+        </div>
+        <div class="popular-item" data-field="engineering">
+          <div class="popular-icon">⚙️</div>
+          Engineering
+        </div>
+        <div class="popular-item" data-field="computer">
+          <div class="popular-icon">💻</div>
+          Computer Science
+        </div>
+        <div class="popular-item" data-field="health">
+          <div class="popular-icon">⚕️</div>
+          Health Sciences
+        </div>
+        <div class="popular-item" data-field="arts">
+          <div class="popular-icon">🎨</div>
+          Arts & Design
+        </div>
+        <div class="popular-item" data-field="science">
+          <div class="popular-icon">🔬</div>
+          Sciences
+        </div>
+      </div>
+    </section>
+
+    <!-- Countries Section -->
+    <section class="countries-section">
+      <h2 class="section-title">Study by Country</h2>
+      <div class="countries-grid">
+        <div class="country-card" data-country="canada">
+          <div class="country-flag">🇨🇦</div>
+          <h3 class="country-name">Canada</h3>
+          <p class="country-programs"><span id="canada-count">0</span> Programs Available</p>
+        </div>
+        <div class="country-card" data-country="usa">
+          <div class="country-flag">🇺🇸</div>
+          <h3 class="country-name">United States</h3>
+          <p class="country-programs"><span id="usa-count">0</span> Programs Available</p>
+        </div>
+        <div class="country-card" data-country="uk">
+          <div class="country-flag">🇬🇧</div>
+          <h3 class="country-name">United Kingdom</h3>
+          <p class="country-programs"><span id="uk-count">0</span> Programs Available</p>
+        </div>
+        <div class="country-card" data-country="australia">
+          <div class="country-flag">🇦🇺</div>
+          <h3 class="country-name">Australia</h3>
+          <p class="country-programs"><span id="australia-count">0</span> Programs Available</p>
+        </div>
+        <div class="country-card" data-country="germany">
+          <div class="country-flag">🇩🇪</div>
+          <h3 class="country-name">Germany</h3>
+          <p class="country-programs"><span id="germany-count">0</span> Programs Available</p>
+        </div>
+        <div class="country-card" data-country="ireland">
+          <div class="country-flag">🇮🇪</div>
+          <h3 class="country-name">Ireland</h3>
+          <p class="country-programs"><span id="ireland-count">0</span> Programs Available</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="steps-section">
+      <h2 class="section-title">How to Apply</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Create Your Profile</h3>
+          <p>Sign up for free and complete your student profile with your academic background and career goals.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Find & Compare Programs</h3>
+          <p>Browse programs, compare universities, and get personalized recommendations based on your profile.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Submit Applications</h3>
+          <p>Apply to multiple programs with our streamlined application process. Track everything in your dashboard.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Get Accepted & Enroll</h3>
+          <p>Receive offers, complete enrollment, and prepare for your study abroad journey with our support.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>Caya Express Travels</h4>
+          <p>Your gateway to world-class education and unforgettable travel experiences.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="/programs.html">Education Programs</a></li>
+            <li><a href="/travel.html">Travel Packages</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>For Partners</h4>
+          <ul>
+            <li><a href="/partner/register">Become a Partner</a></li>
+            <li><a href="/partner/dashboard">Partner Portal</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="/help">Help Center</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 Caya Express Travels. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Programs Database
+      const allPrograms = [
+        // Bachelor's Programs - Canada
+        { id: 1, title: "Bachelor of Engineering - Software", university: "University of Waterloo", location: "Waterloo, Canada", country: "canada", type: "Bachelor's", field: "engineering", icon: "⚙️", duration: "4 years", badge: "" },
+        { id: 2, title: "Bachelor of Science - Biology", university: "University of Toronto", location: "Toronto, Canada", country: "canada", type: "Bachelor's", field: "science", icon: "🔬", duration: "4 years", badge: "" },
+        { id: 3, title: "Bachelor of Data Science", university: "University of British Columbia", location: "Vancouver, Canada", country: "canada", type: "Bachelor's", field: "computer", icon: "📈", duration: "4 years", badge: "New" },
+        { id: 4, title: "Bachelor of Commerce", university: "York University", location: "Toronto, Canada", country: "canada", type: "Bachelor's", field: "business", icon: "💼", duration: "4 years", badge: "" },
+        { id: 5, title: "BSc Nursing", university: "McMaster University", location: "Hamilton, Canada", country: "canada", type: "Bachelor's", field: "health", icon: "🏥", duration: "4 years", badge: "" },
+        { id: 6, title: "Bachelor of Arts - Psychology", university: "McGill University", location: "Montreal, Canada", country: "canada", type: "Bachelor's", field: "arts", icon: "🧠", duration: "3 years", badge: "" },
+        { id: 7, title: "Bachelor of Computer Science", university: "University of Alberta", location: "Edmonton, Canada", country: "canada", type: "Bachelor's", field: "computer", icon: "💻", duration: "4 years", badge: "" },
+        { id: 8, title: "Bachelor of Environmental Science", university: "Dalhousie University", location: "Halifax, Canada", country: "canada", type: "Bachelor's", field: "science", icon: "🌱", duration: "4 years", badge: "" },
+        { id: 9, title: "Bachelor of Mechanical Engineering", university: "Queen's University", location: "Kingston, Canada", country: "canada", type: "Bachelor's", field: "engineering", icon: "⚙️", duration: "4 years", badge: "" },
+        { id: 10, title: "Bachelor of Business Administration", university: "Western University", location: "London, Canada", country: "canada", type: "Bachelor's", field: "business", icon: "💼", duration: "4 years", badge: "" },
+        { id: 11, title: "Bachelor of Health Sciences", university: "Simon Fraser University", location: "Burnaby, Canada", country: "canada", type: "Bachelor's", field: "health", icon: "⚕️", duration: "4 years", badge: "" },
+        { id: 12, title: "Bachelor of Architecture", university: "Carleton University", location: "Ottawa, Canada", country: "canada", type: "Bachelor's", field: "engineering", icon: "🏛️", duration: "5 years", badge: "" },
+        
+        // Bachelor's Programs - UK
+        { id: 13, title: "BSc Computer Science", university: "Imperial College London", location: "London, UK", country: "uk", type: "Bachelor's", field: "computer", icon: "💻", duration: "3 years", badge: "Featured" },
+        { id: 14, title: "BSc Nursing", university: "King's College London", location: "London, UK", country: "uk", type: "Bachelor's", field: "health", icon: "🏥", duration: "3 years", badge: "" },
+        { id: 15, title: "BA in Economics", university: "London School of Economics", location: "London, UK", country: "uk", type: "Bachelor's", field: "business", icon: "📊", duration: "3 years", badge: "" },
+        { id: 16, title: "BSc Mathematics", university: "University of Cambridge", location: "Cambridge, UK", country: "uk", type: "Bachelor's", field: "science", icon: "➗", duration: "3 years", badge: "" },
+        { id: 17, title: "BEng Electrical Engineering", university: "University of Edinburgh", location: "Edinburgh, UK", country: "uk", type: "Bachelor's", field: "engineering", icon: "⚡", duration: "4 years", badge: "" },
+        { id: 18, title: "BA in English Literature", university: "University of Oxford", location: "Oxford, UK", country: "uk", type: "Bachelor's", field: "arts", icon: "📚", duration: "3 years", badge: "" },
+        { id: 19, title: "BSc Psychology", university: "University of Manchester", location: "Manchester, UK", country: "uk", type: "Bachelor's", field: "arts", icon: "🧠", duration: "3 years", badge: "" },
+        { id: 20, title: "BSc Physics", university: "University of Bristol", location: "Bristol, UK", country: "uk", type: "Bachelor's", field: "science", icon: "⚛️", duration: "3 years", badge: "" },
+        
+        // Bachelor's Programs - USA
+        { id: 21, title: "BA in Psychology", university: "University of California, Berkeley", location: "Berkeley, USA", country: "usa", type: "Bachelor's", field: "arts", icon: "🧠", duration: "4 years", badge: "" },
+        { id: 22, title: "Bachelor of Architecture", university: "Cornell University", location: "Ithaca, USA", country: "usa", type: "Bachelor's", field: "engineering", icon: "🏛️", duration: "5 years", badge: "" },
+        { id: 23, title: "BS in Computer Science", university: "Stanford University", location: "Stanford, USA", country: "usa", type: "Bachelor's", field: "computer", icon: "💻", duration: "4 years", badge: "Featured" },
+        { id: 24, title: "Bachelor of Business Administration", university: "New York University", location: "New York, USA", country: "usa", type: "Bachelor's", field: "business", icon: "💼", duration: "4 years", badge: "" },
+        { id: 25, title: "BS in Mechanical Engineering", university: "Georgia Institute of Technology", location: "Atlanta, USA", country: "usa", type: "Bachelor's", field: "engineering", icon: "⚙️", duration: "4 years", badge: "" },
+        { id: 26, title: "BS in Environmental Science", university: "University of Michigan", location: "Ann Arbor, USA", country: "usa", type: "Bachelor's", field: "science", icon: "🌱", duration: "4 years", badge: "" },
+        { id: 27, title: "Bachelor of Fine Arts", university: "Rhode Island School of Design", location: "Providence, USA", country: "usa", type: "Bachelor's", field: "arts", icon: "🎨", duration: "4 years", badge: "" },
+        { id: 28, title: "BS in Data Science", university: "Carnegie Mellon University", location: "Pittsburgh, USA", country: "usa", type: "Bachelor's", field: "computer", icon: "📊", duration: "4 years", badge: "New" },
+        
+        // Bachelor's Programs - Australia
+        { id: 29, title: "Bachelor of Commerce", university: "University of Melbourne", location: "Melbourne, Australia", country: "australia", type: "Bachelor's", field: "business", icon: "💼", duration: "3 years", badge: "" },
+        { id: 30, title: "Bachelor of Laws (LLB)", university: "University of Sydney", location: "Sydney, Australia", country: "australia", type: "Bachelor's", field: "business", icon: "⚖️", duration: "4 years", badge: "" },
+        { id: 31, title: "BA in International Relations", university: "University of Melbourne", location: "Melbourne, Australia", country: "australia", type: "Bachelor's", field: "arts", icon: "🌍", duration: "3 years", badge: "" },
+        { id: 32, title: "Bachelor of Engineering (Honors)", university: "University of New South Wales", location: "Sydney, Australia", country: "australia", type: "Bachelor's", field: "engineering", icon: "⚙️", duration: "4 years", badge: "" },
+        { id: 33, title: "Bachelor of Information Technology", university: "Queensland University of Technology", location: "Brisbane, Australia", country: "australia", type: "Bachelor's", field: "computer", icon: "💻", duration: "3 years", badge: "" },
+        { id: 34, title: "Bachelor of Science - Marine Biology", university: "James Cook University", location: "Townsville, Australia", country: "australia", type: "Bachelor's", field: "science", icon: "🐠", duration: "3 years", badge: "" },
+        { id: 35, title: "Bachelor of Nursing", university: "Monash University", location: "Melbourne, Australia", country: "australia", type: "Bachelor's", field: "health", icon: "🏥", duration: "3 years", badge: "" },
+        { id: 36, title: "Bachelor of Design", university: "RMIT University", location: "Melbourne, Australia", country: "australia", type: "Bachelor's", field: "arts", icon: "🎨", duration: "3 years", badge: "" },
+        { id: 37, title: "Bachelor of Business", university: "University of Adelaide", location: "Adelaide, Australia", country: "australia", type: "Bachelor's", field: "business", icon: "💼", duration: "3 years", badge: "" },
+        { id: 38, title: "Bachelor of Environmental Science", university: "Australian National University", location: "Canberra, Australia", country: "australia", type: "Bachelor's", field: "science", icon: "🌱", duration: "3 years", badge: "" },
+        { id: 39, title: "Bachelor of Computer Science", university: "University of Technology Sydney", location: "Sydney, Australia", country: "australia", type: "Bachelor's", field: "computer", icon: "💻", duration: "3 years", badge: "" },
+        { id: 40, title: "Bachelor of Education", university: "Deakin University", location: "Melbourne, Australia", country: "australia", type: "Bachelor's", field: "arts", icon: "📚", duration: "4 years", badge: "" },
+        
+        // Bachelor's Programs - Germany
+        { id: 41, title: "BSc Civil Engineering", university: "Technical University of Munich", location: "Munich, Germany", country: "germany", type: "Bachelor's", field: "engineering", icon: "🏗️", duration: "3 years", badge: "" },
+        { id: 42, title: "BSc Computer Science", university: "RWTH Aachen University", location: "Aachen, Germany", country: "germany", type: "Bachelor's", field: "computer", icon: "💻", duration: "3 years", badge: "" },
+        { id: 43, title: "BSc Mechanical Engineering", university: "Technical University of Berlin", location: "Berlin, Germany", country: "germany", type: "Bachelor's", field: "engineering", icon: "⚙️", duration: "3 years", badge: "" },
+        { id: 44, title: "BA in International Business", university: "University of Mannheim", location: "Mannheim, Germany", country: "germany", type: "Bachelor's", field: "business", icon: "🌐", duration: "3 years", badge: "" },
+        
+        // Bachelor's Programs - Ireland
+        { id: 45, title: "BA in Digital Media & Design", university: "Trinity College Dublin", location: "Dublin, Ireland", country: "ireland", type: "Bachelor's", field: "arts", icon: "🎨", duration: "4 years", badge: "" },
+        { id: 46, title: "BSc Environmental Science", university: "University College Dublin", location: "Dublin, Ireland", country: "ireland", type: "Bachelor's", field: "science", icon: "🌱", duration: "4 years", badge: "" },
+        { id: 47, title: "Bachelor of Engineering", university: "University College Cork", location: "Cork, Ireland", country: "ireland", type: "Bachelor's", field: "engineering", icon: "⚙️", duration: "4 years", badge: "" },
+        { id: 48, title: "Bachelor of Business Studies", university: "National University of Ireland, Galway", location: "Galway, Ireland", country: "ireland", type: "Bachelor's", field: "business", icon: "💼", duration: "3 years", badge: "" },
+        
+        // Master's Programs - Canada
+        { id: 49, title: "Master of Business Administration (MBA)", university: "University of Toronto - Rotman School", location: "Toronto, Canada", country: "canada", type: "Master's", field: "business", icon: "🎓", duration: "2 years", badge: "Featured" },
+        { id: 50, title: "Master of Finance", university: "McGill University", location: "Montreal, Canada", country: "canada", type: "Master's", field: "business", icon: "💰", duration: "1.5 years", badge: "" },
+        { id: 51, title: "Master of Social Work", university: "University of Toronto", location: "Toronto, Canada", country: "canada", type: "Master's", field: "arts", icon: "🤝", duration: "2 years", badge: "" },
+        { id: 52, title: "MS in Aerospace Engineering", university: "University of Toronto", location: "Toronto, Canada", country: "canada", type: "Master's", field: "engineering", icon: "🚀", duration: "2 years", badge: "" },
+        { id: 53, title: "Master of Computer Science", university: "University of British Columbia", location: "Vancouver, Canada", country: "canada", type: "Master's", field: "computer", icon: "💻", duration: "2 years", badge: "" },
+        { id: 54, title: "Master of Engineering - Civil", university: "University of Waterloo", location: "Waterloo, Canada", country: "canada", type: "Master's", field: "engineering", icon: "🏗️", duration: "2 years", badge: "" },
+        { id: 55, title: "Master of Public Health", university: "University of Alberta", location: "Edmonton, Canada", country: "canada", type: "Master's", field: "health", icon: "⚕️", duration: "2 years", badge: "" },
+        { id: 56, title: "Master of Data Science", university: "Simon Fraser University", location: "Burnaby, Canada", country: "canada", type: "Master's", field: "computer", icon: "📊", duration: "1.5 years", badge: "New" },
+        { id: 57, title: "Master of Environmental Studies", university: "York University", location: "Toronto, Canada", country: "canada", type: "Master's", field: "science", icon: "🌱", duration: "2 years", badge: "" },
+        
+        // Master's Programs - UK
+        { id: 58, title: "MSc in Artificial Intelligence", university: "University of Edinburgh", location: "Edinburgh, UK", country: "uk", type: "Master's", field: "computer", icon: "🤖", duration: "1 year", badge: "Featured" },
+        { id: 59, title: "MSc in Cybersecurity", university: "University of Oxford", location: "Oxford, UK", country: "uk", type: "Master's", field: "computer", icon: "🔒", duration: "1 year", badge: "New" },
+        { id: 60, title: "Master of Public Policy", university: "London School of Economics", location: "London, UK", country: "uk", type: "Master's", field: "business", icon: "📜", duration: "1 year", badge: "" },
+        { id: 61, title: "MSc in Data Science", university: "Imperial College London", location: "London, UK", country: "uk", type: "Master's", field: "computer", icon: "📊", duration: "1 year", badge: "" },
+        { id: 62, title: "Master of Finance", university: "University of Cambridge", location: "Cambridge, UK", country: "uk", type: "Master's", field: "business", icon: "💰", duration: "1 year", badge: "" },
+        
+        // PhD Programs - Canada
+        { id: 87, title: "PhD in Environmental Engineering", university: "University of Toronto", location: "Toronto, Canada", country: "canada", type: "PhD", field: "engineering", icon: "🌍", duration: "4 years", badge: "Funded" },
+        { id: 88, title: "PhD in Civil Engineering", university: "University of British Columbia", location: "Vancouver, Canada", country: "canada", type: "PhD", field: "engineering", icon: "🏗️", duration: "4 years", badge: "" },
+        { id: 89, title: "PhD in Computer Science", university: "University of Waterloo", location: "Waterloo, Canada", country: "canada", type: "PhD", field: "computer", icon: "💻", duration: "5 years", badge: "Funded" },
+        { id: 90, title: "PhD in Neuroscience", university: "McGill University", location: "Montreal, Canada", country: "canada", type: "PhD", field: "science", icon: "🧠", duration: "5 years", badge: "" },
+        
+        // PhD Programs - UK
+        { id: 91, title: "PhD in Economics", university: "University of Cambridge", location: "Cambridge, UK", country: "uk", type: "PhD", field: "business", icon: "📈", duration: "4 years", badge: "" },
+        { id: 92, title: "PhD in Literature", university: "University of Oxford", location: "Oxford, UK", country: "uk", type: "PhD", field: "arts", icon: "📚", duration: "3 years", badge: "" },
+        { id: 93, title: "PhD in Artificial Intelligence", university: "University of Edinburgh", location: "Edinburgh, UK", country: "uk", type: "PhD", field: "computer", icon: "🤖", duration: "4 years", badge: "" },
+        
+        // Certificate Programs - Canada
+        { id: 104, title: "Graduate Certificate in Project Management", university: "George Brown College", location: "Toronto, Canada", country: "canada", type: "Certificate", field: "business", icon: "📋", duration: "8 months", badge: "" },
+        { id: 105, title: "Certificate in Digital Marketing", university: "Humber College", location: "Toronto, Canada", country: "canada", type: "Certificate", field: "business", icon: "📱", duration: "6 months", badge: "New" },
+        { id: 106, title: "Graduate Certificate in Web Development", university: "Centennial College", location: "Toronto, Canada", country: "canada", type: "Certificate", field: "computer", icon: "🌐", duration: "1 year", badge: "" },
+        { id: 107, title: "Certificate in Data Analytics", university: "Seneca College", location: "Toronto, Canada", country: "canada", type: "Certificate", field: "computer", icon: "📊", duration: "1 year", badge: "Featured" },
+        { id: 108, title: "Graduate Certificate in Healthcare Management", university: "Conestoga College", location: "Kitchener, Canada", country: "canada", type: "Certificate", field: "health", icon: "🏥", duration: "1 year", badge: "" },
+        { id: 109, title: "Certificate in UX/UI Design", university: "Sheridan College", location: "Oakville, Canada", country: "canada", type: "Certificate", field: "arts", icon: "🎨", duration: "8 months", badge: "" },
+        { id: 110, title: "Graduate Certificate in Cybersecurity", university: "Algonquin College", location: "Ottawa, Canada", country: "canada", type: "Certificate", field: "computer", icon: "🔒", duration: "1 year", badge: "" },
+        { id: 111, title: "Certificate in Supply Chain Management", university: "Durham College", location: "Oshawa, Canada", country: "canada", type: "Certificate", field: "business", icon: "📦", duration: "8 months", badge: "" },
+        { id: 112, title: "Graduate Certificate in Cloud Computing", university: "Lambton College", location: "Sarnia, Canada", country: "canada", type: "Certificate", field: "computer", icon: "☁️", duration: "1 year", badge: "New" },
+        { id: 113, title: "Certificate in Hospitality Management", university: "Georgian College", location: "Barrie, Canada", country: "canada", type: "Certificate", field: "business", icon: "🏨", duration: "1 year", badge: "" },
+        { id: 114, title: "Graduate Certificate in Artificial Intelligence", university: "George Brown College", location: "Toronto, Canada", country: "canada", type: "Certificate", field: "computer", icon: "🤖", duration: "1 year", badge: "New" },
+        { id: 115, title: "Certificate in International Business", university: "Humber College", location: "Toronto, Canada", country: "canada", type: "Certificate", field: "business", icon: "🌐", duration: "8 months", badge: "" },
+        
+        // Diploma Programs - Canada
+        { id: 116, title: "Diploma in Business Administration", university: "Fanshawe College", location: "London, Canada", country: "canada", type: "Diploma", field: "business", icon: "💼", duration: "2 years", badge: "" },
+        { id: 117, title: "Advanced Diploma in Software Engineering", university: "Mohawk College", location: "Hamilton, Canada", country: "canada", type: "Diploma", field: "computer", icon: "💻", duration: "3 years", badge: "" },
+        { id: 118, title: "Diploma in Culinary Arts", university: "Niagara College", location: "Niagara, Canada", country: "canada", type: "Diploma", field: "arts", icon: "👨‍🍳", duration: "2 years", badge: "" },
+        { id: 119, title: "Advanced Diploma in Nursing", university: "Confederation College", location: "Thunder Bay, Canada", country: "canada", type: "Diploma", field: "health", icon: "🏥", duration: "3 years", badge: "" },
+        { id: 120, title: "Diploma in Graphic Design", university: "St. Lawrence College", location: "Kingston, Canada", country: "canada", type: "Diploma", field: "arts", icon: "🎨", duration: "2 years", badge: "" },
+        { id: 121, title: "Advanced Diploma in Mechanical Engineering", university: "Seneca College", location: "Toronto, Canada", country: "canada", type: "Diploma", field: "engineering", icon: "⚙️", duration: "3 years", badge: "" },
+        { id: 122, title: "Diploma in Digital Marketing", university: "George Brown College", location: "Toronto, Canada", country: "canada", type: "Diploma", field: "business", icon: "📱", duration: "2 years", badge: "" },
+        { id: 123, title: "Advanced Diploma in Network Engineering", university: "Centennial College", location: "Toronto, Canada", country: "canada", type: "Diploma", field: "computer", icon: "🌐", duration: "3 years", badge: "" },
+        { id: 124, title: "Diploma in Event Management", university: "Humber College", location: "Toronto, Canada", country: "canada", type: "Diploma", field: "business", icon: "🎉", duration: "2 years", badge: "" },
+        { id: 125, title: "Advanced Diploma in Health Information Management", university: "Conestoga College", location: "Kitchener, Canada", country: "canada", type: "Diploma", field: "health", icon: "📋", duration: "3 years", badge: "" }
+      ];
+
+      let currentFilter = 'all';
+      let displayedPrograms = [...allPrograms];
+
+      // Update country counts
+      function updateCountryCounts() {
+        const countries = ['canada', 'usa', 'uk', 'australia', 'germany', 'ireland'];
+        countries.forEach(country => {
+          const count = allPrograms.filter(p => p.country === country).length;
+          const countElement = document.getElementById(`${country}-count`);
+          if (countElement) {
+            countElement.textContent = count;
+          }
+        });
+      }
+
+      // Display programs
+      function displayPrograms(programs) {
+        const grid = document.getElementById('programsGrid');
+        const resultsCount = document.querySelector('.results-count');
+        
+        resultsCount.textContent = `${programs.length} Programs Found`;
+        
+        if (programs.length === 0) {
+          grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gray-600);">No programs found matching your criteria. Try adjusting your filters.</p>';
+          return;
+        }
+        
+        grid.innerHTML = programs.map(program => `
+          <div class="program-card" data-id="${program.id}">
+            <div class="program-image">
+              <span>${program.icon}</span>
+              ${program.badge ? `<div class="program-badge">${program.badge}</div>` : ''}
+            </div>
+            <div class="program-content">
+              <div class="program-meta">
+                <span class="meta-tag">📍 ${program.location}</span>
+                <span class="meta-tag">🎯 ${program.type}</span>
+              </div>
+              <h3 class="program-title">${program.title}</h3>
+              <p class="program-university">${program.university}</p>
+              <div class="program-details">
+                <div class="program-duration">⏱️ ${program.duration}</div>
+                <div class="program-level">📚 ${program.field.charAt(0).toUpperCase() + program.field.slice(1)}</div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        // Add click listeners to new cards
+        document.querySelectorAll('.program-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const id = card.getAttribute('data-id');
+            const program = allPrograms.find(p => p.id == id);
+            alert(`${program.title}\n${program.university}\n\nThis would open the detailed program page.`);
+          });
+        });
+      }
+
+      // Filter by type
+      function filterByType(type) {
+        currentFilter = type;
+        if (type === 'all') {
+          displayedPrograms = [...allPrograms];
+        } else {
+          displayedPrograms = allPrograms.filter(p => p.type === type);
+        }
+        applyAllFilters();
+      }
+
+      // Apply all active filters
+      function applyAllFilters() {
+        let filtered = [...displayedPrograms];
+
+        // Country filters
+        const selectedCountries = Array.from(document.querySelectorAll('input[type="checkbox"][id="canada"], input[type="checkbox"][id="usa"], input[type="checkbox"][id="uk"], input[type="checkbox"][id="australia"], input[type="checkbox"][id="germany"], input[type="checkbox"][id="ireland"]'))
+          .filter(cb => cb.checked)
+          .map(cb => cb.id);
+        
+        if (selectedCountries.length > 0) {
+          filtered = filtered.filter(p => selectedCountries.includes(p.country));
+        }
+
+        // Field filters
+        const selectedFields = Array.from(document.querySelectorAll('input[type="checkbox"][id="business"], input[type="checkbox"][id="engineering"], input[type="checkbox"][id="computer"], input[type="checkbox"][id="health"], input[type="checkbox"][id="arts"], input[type="checkbox"][id="science"]'))
+          .filter(cb => cb.checked)
+          .map(cb => cb.id);
+        
+        if (selectedFields.length > 0) {
+          filtered = filtered.filter(p => selectedFields.includes(p.field));
+        }
+
+        // Search filter
+        const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+        if (searchTerm) {
+          filtered = filtered.filter(p => 
+            p.title.toLowerCase().includes(searchTerm) ||
+            p.university.toLowerCase().includes(searchTerm) ||
+            p.location.toLowerCase().includes(searchTerm)
+          );
+        }
+
+        displayPrograms(filtered);
+      }
+
+      // Quick filters functionality
+      const filterTags = document.querySelectorAll('.filter-tag');
+      filterTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+          filterTags.forEach(t => t.classList.remove('active'));
+          tag.classList.add('active');
+          
+          const filterText = tag.textContent.trim();
+          if (filterText === 'All Programs') {
+            filterByType('all');
+          } else if (filterText === "Bachelor's") {
+            filterByType("Bachelor's");
+          } else if (filterText === "Master's") {
+            filterByType("Master's");
+          } else if (filterText === 'PhD') {
+            filterByType('PhD');
+          } else if (filterText === 'Certificate') {
+            filterByType('Certificate');
+          }
+        });
+      });
+
+      // Search functionality
+      document.querySelector('.search-input').addEventListener('input', applyAllFilters);
+      document.querySelector('.search-section .btn-primary').addEventListener('click', applyAllFilters);
+
+      // Checkbox filters
+      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', applyAllFilters);
+      });
+
+      // Sort functionality
+      document.querySelector('.sort-select').addEventListener('change', (e) => {
+        const sortBy = e.target.value;
+        let sorted = [...displayedPrograms];
+
+        if (sortBy.includes('Shortest')) {
+          sorted.sort((a, b) => {
+            const getDuration = (str) => parseFloat(str);
+            return getDuration(a.duration) - getDuration(b.duration);
+          });
+        }
+
+        displayPrograms(sorted);
+      });
+
+      // Country card click
+      const countryCards = document.querySelectorAll('.country-card');
+      countryCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const countryName = card.querySelector('.country-name').textContent.trim().toLowerCase();
+          const countryMap = {
+            'canada': 'canada',
+            'united states': 'usa',
+            'united kingdom': 'uk',
+            'australia': 'australia',
+            'germany': 'germany',
+            'ireland': 'ireland'
+          };
+          
+          const countryId = countryMap[countryName];
+          
+          // Clear all filters first
+          document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+          document.querySelector('.search-input').value = '';
+          
+          // Reset to show all program types
+          filterTags.forEach(t => t.classList.remove('active'));
+          filterTags[0].classList.add('active');
+          currentFilter = 'all';
+          displayedPrograms = [...allPrograms];
+          
+          // Apply country filter
+          const checkbox = document.getElementById(countryId);
+          checkbox.checked = true;
+          
+          // Filter and display
+          const countryPrograms = allPrograms.filter(p => p.country === countryId);
+          displayPrograms(countryPrograms);
+          
+          // Scroll to results
+          document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Popular field click handlers
+      document.querySelectorAll('.popular-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const fieldId = item.getAttribute('data-field');
+          
+          // Clear all filters
+          document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+          document.querySelector('.search-input').value = '';
+          
+          // Reset to show all program types
+          filterTags.forEach(t => t.classList.remove('active'));
+          filterTags[0].classList.add('active');
+          currentFilter = 'all';
+          displayedPrograms = [...allPrograms];
+          
+          // Check the field checkbox
+          const fieldCheckbox = document.getElementById(fieldId);
+          if (fieldCheckbox) {
+            fieldCheckbox.checked = true;
+          }
+          
+          // Filter and display
+          const fieldPrograms = allPrograms.filter(p => p.field === fieldId);
+          displayPrograms(fieldPrograms);
+          
+          // Scroll to results
+          document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Clear filters
+      document.querySelector('.clear-filters').addEventListener('click', () => {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        document.querySelector('.search-input').value = '';
+        filterTags.forEach(t => t.classList.remove('active'));
+        filterTags[0].classList.add('active');
+        filterByType('all');
+      });
+
+      // Initialize
+      updateCountryCounts();
+      displayPrograms(allPrograms);
+    </script>
+  </body>
+</html>

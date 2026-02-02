@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visa Processing Services - Caya Express</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gold: #D4AF37;
+      --dark-blue: #1a237e;
+      --gray-900: #111827;
+      --gray-800: #1f2937;
+      --gray-700: #374151;
+      --gray-600: #4b5563;
+      --gray-500: #6b7280;
+      --gray-400: #9ca3af;
+      --gray-300: #d1d5db;
+      --gray-200: #e5e7eb;
+      --gray-100: #f3f4f6;
+      --gray-50: #f9fafb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--gray-800);
+      background: white;
+    }
+
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-700);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-gold);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary-gold);
+      margin: 3px 0;
+      transition: all 0.3s;
+      border-radius: 3px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .back-home {
+      background: var(--gray-100);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, rgba(22, 160, 133, 0.9) 0%, rgba(46, 204, 113, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=80') center/cover no-repeat;
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Quick Services */
+    .quick-services {
+      max-width: 1400px;
+      margin: -3rem auto 4rem;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .service-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      color: var(--gray-900);
+      font-weight: 600;
+    }
+
+    /* Content Section */
+    .content-section {
+      max-width: 1400px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray-600);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Visa Services */
+    .visa-services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .visa-service {
+      background: var(--gray-50);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px solid var(--gray-200);
+      transition: all 0.3s;
+    }
+
+    .visa-service:hover {
+      border-color: var(--primary-gold);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+    }
+
+    .visa-service h3 {
+      font-size: 1.5rem;
+      color: var(--gray-900);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .visa-service h3 span {
+      font-size: 2rem;
+    }
+
+    .visa-service p {
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .visa-service ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .visa-service ul li {
+      padding: 0.5rem 0;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .visa-service ul li:before {
+      content: "✓";
+      color: #16a085;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* Process Timeline */
+    .process-timeline {
+      background: var(--gray-50);
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      margin: 3rem 0;
+    }
+
+    .timeline-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--gray-900);
+    }
+
+    .timeline-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timeline-step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-gold) 0%, #c49b2c 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    .step-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(26, 35, 126, 0.95) 0%, rgba(40, 53, 147, 0.95) 100%),
+                  url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&q=80') center/cover no-repeat;
+      padding: 4rem 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .cta-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .cta-btn.primary {
+      background: var(--primary-gold);
+      color: white;
+    }
+
+    .cta-btn.primary:hover {
+      background: #c49b2c;
+      transform: translateY(-2px);
+    }
+
+    .cta-btn.secondary {
+      background: white;
+      color: var(--dark-blue);
+    }
+
+    .cta-btn.secondary:hover {
+      background: var(--gray-100);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gray-900);
+      color: white;
+      padding: 3rem 2rem 1rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer h3 {
+      color: var(--primary-gold);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer p, .footer a {
+      color: var(--gray-400);
+      line-height: 1.8;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--primary-gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-800);
+      color: var(--gray-500);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 6rem 2rem 2rem;
+        gap: 1rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 100;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: left;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .logo span {
+        font-size: 1rem !important;
+      }
+
+      .logo img {
+        height: 60px !important;
+      }
+
+      .timeline-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/caya-logo.jpg" alt="Caya Express Travel Logo" style="height: 90px; width: auto; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <span style="font-size: 1.3rem;">CAYA EXPRESS TRAVEL</span>
+      </a>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="/" onclick="closeMenu()">Our Services</a></li>
+        <li><a href="study-abroad.html" onclick="closeMenu()">Study Abroad</a></li>
+        <li><a href="visa.html" onclick="closeMenu()">Visa Services</a></li>
+        <li><a href="tours.html" onclick="closeMenu()">Tour Packages</a></li>
+        <li><a href="travel.html" onclick="closeMenu()">Flight Booking</a></li>
+        <li><a href="agent-portal.html" onclick="closeMenu()">Agent Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- (Duplicate header removed) -->
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Professional Visa Processing Services</h1>
+    <p>We help you get the right visa for your travel needs. Tourist, business, family visits - we handle it all.</p>
+  </section>
+
+  <!-- Quick Services -->
+  <div class="quick-services">
+    <div class="service-card" onclick="document.getElementById('tourist-visa').scrollIntoView({behavior: 'smooth'})">
+      <h3>Tourist Visa</h3>
+    </div>
+    <div class="service-card" onclick="document.getElementById('business-visa').scrollIntoView({behavior: 'smooth'})">
+      <h3>Business Visa</h3>
+    </div>
+    <div class="service-card" onclick="document.getElementById('family-visa').scrollIntoView({behavior: 'smooth'})">
+      <h3>Family Visa</h3>
+    </div>
+    <div class="service-card" onclick="window.open('https://wa.me/2349160003177', '_blank')">
+      <h3>Get Consultation</h3>
+    </div>
+  </div>
+
+  <!-- Visa Services -->
+  <section class="content-section">
+    <h2 class="section-title">Our Visa Services</h2>
+    <p class="section-subtitle">Comprehensive visa processing with expert guidance at every step</p>
+    
+    <div class="visa-services-grid">
+      <div class="visa-service" id="tourist-visa">
+        <h3>Tourist Visa</h3>
+        <p>Explore the world with our comprehensive tourist visa services for your vacation and leisure travel.</p>
+        <ul>
+          <li>Vacation and holiday travel visas</li>
+          <li>Complete document preparation & review</li>
+          <li>Application form filling and submission</li>
+          <li>Interview preparation and coaching</li>
+          <li>Application tracking and follow-up</li>
+          <li>Supporting documentation assistance</li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-300);">
+          <strong>Popular Destinations:</strong><br>
+          USA, UK, Canada, Schengen (Europe), Australia, Dubai, Turkey
+        </div>
+      </div>
+
+      <div class="visa-service" id="business-visa">
+        <h3>Business Visa</h3>
+        <p>Seamless business travel for conferences, meetings, trade shows, and corporate opportunities.</p>
+        <ul>
+          <li>Business meetings & conferences</li>
+          <li>Trade shows & exhibitions</li>
+          <li>Corporate documentation support</li>
+          <li>Express processing available</li>
+          <li>Multi-entry visa options</li>
+          <li>Invitation letter verification</li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-300);">
+          <strong>Processing Time:</strong> 2-4 weeks (Express: 5-7 days)
+        </div>
+      </div>
+
+      <div class="visa-service" id="family-visa">
+        <h3>Family Visit Visa</h3>
+        <p>Reunite with loved ones abroad with our comprehensive family visit visa assistance.</p>
+        <ul>
+          <li>Visit family & friends overseas</li>
+          <li>Sponsorship letter guidance</li>
+          <li>Financial documentation support</li>
+          <li>Relationship proof assistance</li>
+          <li>Long-term multi-entry options</li>
+          <li>Extension and renewal support</li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-300);">
+          <strong>Success Rate:</strong> 95%+ approval rate
+        </div>
+      </div>
+
+      <div class="visa-service">
+        <h3>Student Visa</h3>
+        <p>Study abroad with confidence through our dedicated student visa processing services.</p>
+        <ul>
+          <li>Study permit applications</li>
+          <li>University acceptance letter support</li>
+          <li>Financial proof documentation</li>
+          <li>Biometrics appointment scheduling</li>
+          <li>Pre-departure orientation</li>
+          <li>Post-arrival support services</li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-300);">
+          <strong>Countries:</strong> Canada, USA, UK, Australia, Germany, Ireland
+        </div>
+      </div>
+
+      <div class="visa-service">
+        <h3>Transit Visa</h3>
+        <p>Smooth layover experiences with proper transit visa documentation and processing.</p>
+        <ul>
+          <li>Airport transit visas</li>
+          <li>Short-stay transit permits</li>
+          <li>Connecting flight documentation</li>
+          <li>Same-day processing available</li>
+          <li>Multiple country transit support</li>
+          <li>Emergency transit assistance</li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-300);">
+          <strong>Required For:</strong> USA, UK, Canada, Schengen countries
+        </div>
+      </div>
+
+      <div class="visa-service">
+        <h3>Spouse/Fiancé Visa</h3>
+        <p>Join your partner abroad with our specialized spouse and fiancé visa services.</p>
+        <ul>
+          <li>Marriage visa applications</li>
+          <li>Fiancé(e) visa processing</li>
+          <li>Relationship evidence compilation</li>
+          <li>Interview preparation support</li>
+          <li>Permanent residence pathway</li>
+          <li>Family reunification assistance</li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--gray-300);">
+          <strong>Expert Support:</strong> Dedicated relationship visa specialists
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Timeline -->
+  <div class="process-timeline">
+    <h2 class="timeline-title">Our Visa Processing Steps</h2>
+    <div class="timeline-steps">
+      <div class="timeline-step">
+        <div class="step-number">1</div>
+        <h3 class="step-title">Free Consultation</h3>
+        <p class="step-desc">Discuss your travel plans and visa requirements with our experts</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-number">2</div>
+        <h3 class="step-title">Document Review</h3>
+        <p class="step-desc">We review and prepare all required documents for your application</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Application Submission</h3>
+        <p class="step-desc">Submit your complete application with supporting documents</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-number">4</div>
+        <h3 class="step-title">Interview Prep</h3>
+        <p class="step-desc">Receive coaching and preparation for visa interviews (if required)</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-number">5</div>
+        <h3 class="step-title">Visa Approval</h3>
+        <p class="step-desc">Receive your approved visa and travel documents</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Ready to Apply for Your Visa?</h2>
+      <p>Start your visa application today with expert guidance every step of the way</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/2349160003177" class="cta-btn primary" target="_blank">
+          <span>💬</span>
+          <span>Chat on WhatsApp</span>
+        </a>
+        <a href="tel:+2348101549916" class="cta-btn secondary">
+          <span>📞</span>
+          <span>Call Us Now</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <h3>Caya Express Travel</h3>
+        <p>Your trusted partner for visa processing, study abroad, tour packages, and international travel services.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="/">Home</a></p>
+        <p><a href="study-abroad.html">Study Abroad</a></p>
+        <p><a href="visa.html">Visa Services</a></p>
+        <p><a href="tours.html">Tour Packages</a></p>
+        <p><a href="travel.html">Flight Booking</a></p>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p><strong>Email:</strong></p>
+        <p>cayaexpresstravels@gmail.com</p>
+        <p>info@cayaexpresstravel.com</p>
+        <p style="margin-top: 0.5rem;"><strong>Phone:</strong></p>
+        <p>+234 810 154 9916</p>
+        <p>+234 916 000 3177</p>
+        <p>+234 706 543 3796</p>
+        <p style="margin-top: 0.5rem;"><strong>Address:</strong></p>
+        <p>Road 1, B70, Ikota Shopping Complex,</p>
+        <p>Road 1, B70, Ikota Shopping Complex, V.G.C Ajah Lagos, Nigeria</p>
+        <p style="margin-top: 0.5rem;"><a href="https://wa.me/2348101549916" target="_blank" style="color: #25D366;">WhatsApp</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Caya Express Travel. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Functions
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if (!navMenu || !hamburger) return;
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
+
+    function closeMenu() {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if (!navMenu || !hamburger) return;
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if (!navMenu || !hamburger) return;
+      const isClickInside = navMenu.contains(event.target) || hamburger.contains(event.target);
+      if (!isClickInside && navMenu.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+  </script>
+
+  <!-- Caya.ai compact Chatbot (injected) -->
+  <script src="caya-ai-fixed.js"></script>
+  <style>
+    .caya-chatbot-container{position:fixed;bottom:20px;right:20px;z-index:9999;font-family:Inter, sans-serif}
+    .caya-chat-button{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#c49b2c);border:3px solid #fff;box-shadow:0 8px 30px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer}
+    .caya-chatbox{position:fixed;bottom:100px;right:20px;width:340px;max-width:calc(100vw - 40px);height:480px;background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);display:none;flex-direction:column;overflow:hidden}
+    .caya-chatbox.active{display:flex}
+    .caya-chat-header{background:#1a237e;color:#fff;padding:12px;display:flex;align-items:center;justify-content:space-between}
+    .caya-chat-messages{flex:1;overflow:auto;padding:12px;background:#f9fafb}
+    .caya-input-area{padding:10px;border-top:1px solid #eee;display:flex;gap:8px}
+    .caya-input{flex:1;padding:10px;border:1px solid #e5e7eb;border-radius:20px}
+    .caya-send{background:linear-gradient(135deg,#D4AF37,#c49b2c);border:none;color:#fff;border-radius:50%;width:44px;height:44px;cursor:pointer}
+    .caya-msg{margin-bottom:10px;display:flex;gap:8px}
+    .caya-msg.bot .bubble{background:#fff;color:#111;padding:8px 12px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+    .caya-msg.user{justify-content:flex-end}
+    .caya-msg.user .bubble{background:#1a237e;color:#fff;padding:8px 12px;border-radius:12px}
+  </style>
+  <div class="caya-chatbot-container">
+    <button class="caya-chat-button" id="cayaToggleBtn" aria-label="Chat">🤖</button>
+    <div class="caya-chatbox" id="cayaChatbox">
+      <div class="caya-chat-header"><strong>Caya.ai</strong><button id="cayaClose" style="background:transparent;border:none;color:#fff;font-size:18px;cursor:pointer">×</button></div>
+      <div class="caya-chat-messages" id="cayaMessages"></div>
+      <div class="caya-input-area">
+        <input id="cayaInput" class="caya-input" placeholder="Ask me anything..." />
+        <button class="caya-send" id="cayaSend">➤</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      const toggle = document.getElementById('cayaToggleBtn');
+      const box = document.getElementById('cayaChatbox');
+      const closeBtn = document.getElementById('cayaClose');
+      const sendBtn = document.getElementById('cayaSend');
+      const input = document.getElementById('cayaInput');
+      const messages = document.getElementById('cayaMessages');
+
+      function appendMsg(text, who){
+        const d = document.createElement('div'); d.className = 'caya-msg ' + (who==='user'?'user':'bot');
+        const b = document.createElement('div'); b.className = 'bubble'; b.innerText = text;
+        d.appendChild(b); messages.appendChild(d); messages.scrollTop = messages.scrollHeight;
+      }
+
+      function getResponse(msg){
+        if(typeof cayaAI !== 'undefined' && typeof cayaAI.generateResponse === 'function'){
+          try{ const r = cayaAI.generateResponse(msg); return (r && r.response)? r.response : 'Sorry, I could not process that.'; }catch(e){return 'Sorry, something went wrong.'}
+        }
+        return 'Hi — Caya.ai is not loaded here. Please visit the homepage for full chat features.';
+      }
+
+      toggle && toggle.addEventListener('click', function(){ box.classList.toggle('active'); if(box.classList.contains('active') && messages.children.length===0){ setTimeout(()=>appendMsg(getResponse(''), 'bot'),400); } });
+      closeBtn && closeBtn.addEventListener('click', ()=>box.classList.remove('active'));
+      sendBtn && sendBtn.addEventListener('click', ()=>{ const v=input.value.trim(); if(!v) return; appendMsg(v,'user'); input.value=''; setTimeout(()=>appendMsg(getResponse(v),'bot'),300); });
+      input && input.addEventListener('keypress', function(e){ if(e.key==='Enter'){ sendBtn && sendBtn.click(); } });
+    })();
+  </script>
+
+  <!-- (duplicate mobile menu script removed - already present earlier) -->
+
+</body>
+</html>

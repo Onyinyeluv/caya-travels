@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  createdAt DateTime  @default(now())
+  listings  Listing[]
+  bookings  Booking[]
+  admin     Admin?
+  partner   Partner?
+}
+
+model Admin {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+  role   String @default("admin")
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String
+  userId    String?
+  userEmail String?
+  meta      Json?
+  createdAt DateTime @default(now())
+}
+
+model Listing {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  priceCents  Int
+  lat         Float
+  lng         Float
+  owner       User     @relation(fields: [ownerId], references: [id])
+  ownerId     String
+  createdAt   DateTime @default(now())
+  bookings    Booking[]
+  program     Program?
+  applications Application[]
+}
+
+model Booking {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  listing    Listing  @relation(fields: [listingId], references: [id])
+  listingId  String
+  startDate  DateTime
+  endDate    DateTime
+  totalCents Int
+  status     BookingStatus @default(PENDING)
+  createdAt  DateTime @default(now())
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum ListingType {
+  TRAVEL
+  PROGRAM
+}
+
+model Program {
+  id                String   @id @default(cuid())
+  listing           Listing  @relation(fields: [listingId], references: [id])
+  listingId         String   @unique
+  degree            String?
+  intakeStart       DateTime?
+  intakeEnd         DateTime?
+  requirements      String?
+  applicationFeeCents Int?
+  documents         Json?
+  createdAt         DateTime @default(now())
+}
+
+model Partner {
+  id      String @id @default(cuid())
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String @unique
+  name    String?
+  createdAt DateTime @default(now())
+  approved Boolean  @default(false)
+  approvedAt DateTime?
+  applications Application[]
+}
+
+model Application {
+  id           String   @id @default(cuid())
+  applicantName String
+  email        String
+  phone        String?
+  listing      Listing? @relation(fields: [listingId], references: [id])
+  listingId    String?
+  partner      Partner? @relation(fields: [partnerId], references: [id])
+  partnerId    String?
+  status       ApplicationStatus @default(PENDING)
+  partnerNotes Json?
+  createdAt    DateTime @default(now())
+}
+
+enum ApplicationStatus {
+  PENDING
+  IN_REVIEW
+  ACCEPTED
+  REJECTED
+  WITHDRAWN
+}

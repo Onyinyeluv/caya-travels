@@ -1,0 +1,37 @@
+LOGO SETUP INSTRUCTIONS
+========================
+
+IMPORTANT: Please save your Caya Travel logo as "caya-logo.png" in this assets folder.
+
+The logo should be:
+- File name: caya-logo.png
+- Location: c:\Users\Angel\Desktop\CA\frontend\assets\caya-logo.png
+- Recommended size: 200px x 200px (or similar square/rectangular format)
+- Format: PNG with transparent background (recommended)
+
+All pages are already configured to use: assets/caya-logo.png
+
+Pages updated with logo:
+✓ main.html (Main landing page)
+✓ study-abroad.html (Study Abroad Portal)
+✓ visa-tours.html (Visa & Tours Portal)
+✓ travel.html (Flight Ticketing)
+✓ programs.html (Programs listing)
+✓ partner.html (Partner recruitment)
+✓ agent-portal.html (Agent login & dashboard)
+✓ admin-partners.html (Admin panel)
+
+Contact Information Updated:
+✓ All phone numbers updated to: +234 916 000 3177
+✓ All WhatsApp links updated to: https://wa.me/2349160003177
+✓ Email remains: cayaexpresstravels@gmail.com
+
+To add your logo:
+1. Save the Caya Travel logo you provided as "caya-logo.png"
+2. Place it in this folder: c:\Users\Angel\Desktop\CA\frontend\assets\
+3. The logo will automatically appear on all pages!
+
+If you need to use a different image format or name, update the src attribute in each HTML file from:
+    src="assets/caya-logo.png"
+to:
+    src="assets/YOUR_LOGO_NAME.jpg" (or .png, .svg, etc.)

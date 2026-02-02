@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: caya-duffel-backend
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: DUFFEL_API_KEY
+        sync: false
+      - key: EMAIL_USER
+        value: cayaexpresstravels@gmail.com
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: PORT
+        value: 3000
