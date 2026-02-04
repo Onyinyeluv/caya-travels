@@ -21,9 +21,9 @@ const corsOptions = {
       'http://127.0.0.1:5500',
       'http://localhost:3001',
       'http://127.0.0.1:3001',
-      // Add your production domain here (uncomment and update):
-      // 'https://yourdomain.com',
-      // 'https://www.yourdomain.com'
+      // Production domains
+      'https://kaleidoscopic-kulfi-807d60.netlify.app',
+      'https://www.kaleidoscopic-kulfi-807d60.netlify.app'
     ];
     
     if (allowedOrigins.indexOf(origin) !== -1) {
