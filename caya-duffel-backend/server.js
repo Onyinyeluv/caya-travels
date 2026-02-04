@@ -23,7 +23,9 @@ const corsOptions = {
       'http://127.0.0.1:3001',
       // Production domains
       'https://kaleidoscopic-kulfi-807d60.netlify.app',
-      'https://www.kaleidoscopic-kulfi-807d60.netlify.app'
+      'https://www.kaleidoscopic-kulfi-807d60.netlify.app',
+      'https://cayaexpresstravel.com',
+      'https://www.cayaexpresstravel.com'
     ];
     
     if (allowedOrigins.indexOf(origin) !== -1) {
