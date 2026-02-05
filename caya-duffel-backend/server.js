@@ -85,6 +85,8 @@ app.post("/search-flights", async (req, res) => {
       }
     ];
 
+    const isReturnTrip = req.body.returnDate ? true : false;
+
     if (req.body.returnDate) {
       slices.push({
         origin: req.body.destination,
@@ -101,17 +103,31 @@ app.post("/search-flights", async (req, res) => {
 
     console.log(`Found ${response.data.offers.length} offers`);
     
+    // USD to Naira conversion rate
+    const USD_TO_NGN = 1650;
+    // $200 markup on every fare
+    const FARE_MARKUP = 200;
+    
     const offersWithDetails = response.data.offers.map(o => {
       const totalPrice = Number(o.total_amount);
-      const markupAmount = 200 * (o.slices?.length || 1);
+      // Add $200 markup to every fare
+      const markupAmount = FARE_MARKUP;
       const finalPrice = totalPrice + markupAmount;
+      // Convert final price in USD to Naira
+      const finalPriceNGN = finalPrice * USD_TO_NGN;
       
       return {
         offer_id: o.id,
         airline_price: totalPrice,
+        airline_price_usd: totalPrice,
         markup: markupAmount,
         final_price: finalPrice,
-        currency: o.total_currency,
+        final_price_usd: finalPrice,
+        final_price_ngn: finalPriceNGN,
+        is_return_trip: isReturnTrip,
+        currency_usd: "USD",
+        currency_ngn: "NGN",
+        exchange_rate: USD_TO_NGN,
         slices: o.slices?.map(slice => ({
           origin_iata: slice.origin?.iata_code || slice.origin_iata,
           destination_iata: slice.destination?.iata_code || slice.destination_iata,

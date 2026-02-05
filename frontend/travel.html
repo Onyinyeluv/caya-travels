@@ -1224,17 +1224,13 @@ Please send me available flight options and pricing for this route. Thank you!
           return;
         }
 
-        // Nigerian pricing: Add $200 markup and convert to Naira (1 USD = 1650 NGN)
-        const USD_TO_NGN = 1650;
-        const MARKUP_USD = 200;
-        
-        // Apply markup and conversion to each flight
+        // Use prices calculated by backend (includes $200 markup for returns and conversion to Naira)
         flights.forEach(flight => {
-          const originalPrice = parseFloat(flight.final_price) || 0;
-          const priceWithMarkup = originalPrice + MARKUP_USD;
-          flight.price_ngn = priceWithMarkup * USD_TO_NGN;
-          flight.original_usd = originalPrice;
-          flight.final_usd = priceWithMarkup;
+          // Backend provides final_price_ngn (already includes markup and converted)
+          flight.price_ngn = flight.final_price_ngn || (flight.final_price || flight.airline_price) * 1650;
+          flight.original_usd = flight.airline_price_usd || flight.airline_price || 0;
+          flight.final_usd = flight.final_price_usd || flight.final_price || 0;
+          flight.markup_applied = flight.markup_usd || (flight.is_return_trip ? 200 : 0);
         });
 
         // Calculate total fare in Naira

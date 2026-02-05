@@ -16,24 +16,49 @@ const duffel = new Duffel({
 // Flight search endpoint
 app.post("/search-flights", async (req, res) => {
   try {
+    const slices = [
+      {
+        origin: req.body.origin,
+        destination: req.body.destination,
+        departure_date: req.body.date
+      }
+    ];
+
+    const isReturnTrip = req.body.returnDate ? true : false;
+
+    if (req.body.returnDate) {
+      slices.push({
+        origin: req.body.destination,
+        destination: req.body.origin,
+        departure_date: req.body.returnDate
+      });
+    }
+
     const response = await duffel.offerRequests.create({
-      slices: [
-        {
-          origin: req.body.origin,
-          destination: req.body.destination,
-          departure_date: req.body.date
-        }
-      ],
+      slices,
       passengers: [{ type: "adult" }],
-      cabin_class: "economy"
+      cabin_class: req.body.cabinClass || "economy"
     });
 
-    // ADD $200 MARKUP HERE
+    // USD to Naira conversion rate
+    const USD_TO_NGN = 1650;
+    // $200 markup on every fare
+    const FARE_MARKUP = 200;
+
+    // Add markup to every fare and convert to Naira
     const offersWithMarkup = response.data.offers.map(offer => {
+      const totalPrice = Number(offer.total_amount);
+      const markupAmount = FARE_MARKUP;
+      const finalPrice = totalPrice + markupAmount;
+      const finalPriceNGN = finalPrice * USD_TO_NGN;
+
       return {
         ...offer,
-        marked_up_price:
-          Number(offer.total_amount) + 200
+        airline_price_usd: totalPrice,
+        markup_usd: markupAmount,
+        final_price_usd: finalPrice,
+        final_price_ngn: finalPriceNGN,
+        exchange_rate: USD_TO_NGN
       };
     });
 
